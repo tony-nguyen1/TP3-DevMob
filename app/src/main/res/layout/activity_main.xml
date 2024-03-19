@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/myLayout">
 
     <TextView
         android:layout_width="wrap_content"
@@ -14,5 +15,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="fr.umontpellier.etu.tp3_devmob.UserInputFragment"
+        tools:layout="@layout/fragment_user_input" />
+
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:id="@+id/fragment_container_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:name="fr.umontpellier.etu.tp3_devmob.UserInputFragment" />-->
+
+
+    <!--<LinearLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <fragment
+            android:name="fr.umontpellier.etu.tp3_devmob.UserInputFragment"
+            android:id="@+id/test"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            >
+        </fragment>
+    </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
