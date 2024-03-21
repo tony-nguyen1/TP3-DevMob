@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +60,28 @@ public class UserInputFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_input, container, false);
+        View myView =  inflater.inflate(R.layout.fragment_user_input, container, false);
+
+        this.setHintPlaceholder(myView, R.id.edit_text_surname, "Nguyen");
+        this.setHintPlaceholder(myView, R.id.edit_text_name, "Tony");
+        this.setHintPlaceholder(myView, R.id.edit_text_birthdate, "19/06/2000");
+        this.setHintPlaceholder(myView, R.id.edit_text_number, "+33123456789");
+        this.setHintPlaceholder(myView, R.id.edit_text_mail, "tony.nguyen@etu.umontpellier.fr");
+
+        return myView;
+    }
+
+    private void setHintPlaceholder(View v, int r, String placeholder) {
+        final EditText editText = (EditText) v.findViewById(r);
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    editText.setHint(placeholder);
+                } else {
+                    editText.setHint("");
+                }
+            }
+        });
     }
 }
