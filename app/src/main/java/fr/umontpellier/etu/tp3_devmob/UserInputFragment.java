@@ -2,12 +2,16 @@ package fr.umontpellier.etu.tp3_devmob;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,6 +72,27 @@ public class UserInputFragment extends Fragment {
         this.setHintPlaceholder(myView, R.id.edit_text_number, "+33123456789");
         this.setHintPlaceholder(myView, R.id.edit_text_mail, "tony.nguyen@etu.umontpellier.fr");
 
+        // button action
+        myView.findViewById(R.id.submit_button).setOnClickListener(v -> {
+
+            //Toast.makeText(v.getContext(),"Form was submited",Toast.LENGTH_SHORT).show();
+
+            // data transmission
+            // bundle result will hold the data
+            Bundle result = new Bundle();
+
+            // put data
+            putDataInsideBundle(result, (EditText) myView.findViewById(R.id.edit_text_name), "inputName");
+            putDataInsideBundle(result, (EditText) myView.findViewById(R.id.edit_text_surname), "inputSurname");
+            putDataInsideBundle(result, (EditText) myView.findViewById(R.id.edit_text_birthdate), "inputBirthdate");
+            putDataInsideBundle(result, (EditText) myView.findViewById(R.id.edit_text_number), "inputNumber");
+            putDataInsideBundle(result, (EditText) myView.findViewById(R.id.edit_text_mail), "inputMail");
+
+            // send
+            // notifying fragment manager of change
+            getParentFragmentManager().setFragmentResult("requestKey", result);
+        });
+
         return myView;
     }
 
@@ -83,5 +108,9 @@ public class UserInputFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void putDataInsideBundle(Bundle theDataHolder, EditText editText, String dataName) {
+        theDataHolder.putString(dataName, editText.getText().toString());
     }
 }
