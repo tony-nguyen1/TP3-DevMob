@@ -90,6 +90,13 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_sync"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Synchronised output with form"
+            />
+<!-- https://developer.android.com/develop/ui/views/components/togglebutton?hl=fr -->
         <Button
             android:id="@+id/submit_button"
             android:layout_width="wrap_content"

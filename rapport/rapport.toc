@@ -1,0 +1,17 @@
+\babel@toc {french}{}\relax 
+\contentsline {section}{Introduction}{3}{section*.2}%
+\contentsline {section}{Démonstration}{3}{section*.3}%
+\contentsline {section}{\numberline {1}Fragment}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Création}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Couper l'écran en 2}{3}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Communication entre fragment}{3}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}La synchronisation}{3}{subsection.1.4}%
+\contentsline {section}{\numberline {2}Persistance}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Persistance}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Saisie automatique}{3}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Réseau}{3}{section.3}%
+\contentsline {section}{\numberline {4}Service}{3}{section.4}%
+\contentsline {section}{\numberline {5}Bonus: LifeCycle}{3}{section.5}%
+\contentsline {section}{\numberline {6}Bonus: ViewModel}{3}{section.6}%
+\contentsline {section}{\numberline {7}Bonus: LiveData}{3}{section.7}%
+\contentsline {section}{\numberline {8}Bonus: Room}{3}{section.8}%
