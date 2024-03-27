@@ -94,9 +94,20 @@
             android:id="@+id/switch_sync"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Synchronised output with form"
-            />
+            android:text="Synchronise the form with the output"
+            android:textColor="@color/white" />
 <!-- https://developer.android.com/develop/ui/views/components/togglebutton?hl=fr -->
+        <TextView
+            android:id="@+id/edit_hobby"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/editbox_background"
+            android:drawablePadding="16dp"
+            android:hint="Select activities"
+            android:padding="12dp"
+            app:drawableRightCompat="@android:drawable/arrow_down_float"
+            android:textColorHint="@color/black"
+            android:textColor="#FF0000"/>
         <Button
             android:id="@+id/submit_button"
             android:layout_width="wrap_content"

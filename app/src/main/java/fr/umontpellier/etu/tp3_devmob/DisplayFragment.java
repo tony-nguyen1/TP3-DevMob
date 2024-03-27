@@ -1,5 +1,7 @@
 package fr.umontpellier.etu.tp3_devmob;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -9,7 +11,6 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,63 +84,54 @@ public class DisplayFragment extends Fragment {
 
 
         // Subscribing to wait for change
+        // When another fragment setResult() with same requestKey, do this ->
+        // After click of "Submit" button
         getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
             @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                LinearLayout myLayot = (LinearLayout) myView.findViewById(R.id.displayLayout);
+                Log.v("debug display","received");
 
-                addToView(myLayot,bundle,"inputSurname",R.id.surnameText);
-                //addToView(myLayot,bundle,"inputName");
-                addToView(myLayot,bundle,"inputBirthdate",R.id.birthdateText);
-                addToView(myLayot,bundle,"inputNumber",R.id.numberText);
-                addToView(myLayot,bundle,"inputMail",R.id.mailText);
-                //addToView(myLayot,bundle,"isSynchron");
+                // We set the text inside the empty TextView
+                addToView(bundle,"inputSurname",R.id.surnameText);
+                addToView(bundle,"inputName",R.id.nameText);
+                addToView(bundle,"inputBirthdate",R.id.birthdateText);
+                addToView(bundle,"inputNumber",R.id.numberText);
+                addToView(bundle,"inputMail",R.id.mailText);
+                addToView(bundle,"inputHobbies", R.id.hobbiesText);
+                //addToView(bundle,"isSynchron");
 
+                // so both fragment source and target have same UserInputViewModel
                 model = (UserInputViewModel) bundle.getSerializable("theModel");
 
 
+                // Then, we listen for change through our ViewModel, and edit our TextView accordingly inside onChanged()
                 assert model != null;
-                Log.v("debug",model.toString());
+                //Log.v("debug",model.toString());
 
                 // Create the observer which updates the UI.
-                final Observer<String> nameObserver = new Observer<String>() {
-                    @Override
-                    public void onChanged(@Nullable final String newName) {
-
-                        Log.v("debug","display has observed a change");
-                        // Update the UI, in this case, a TextView.
-                        //nameTextView.setText(newName);
-                        TextView myText = myView.findViewById(R.id.nameText);
-
-                        //myText.setText(bundle.getString("inputName"));
-                        /*myText.setLayoutParams(new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT));
-*/
-                        //myLayot.removeAllViews();
-                        //myLayot.addView(myText);
-
-                        Log.v("debug current display",myText.getText().toString());
-                        Log.v("debug display wanted",myText.getText().toString());
-
-//                        addToView(myLayot, bundle, "inputName", R.id.nameText);
-                        myText.setText(newName);
-
-                    }
-                };
+                // done inside createCustomObserver()
 
                 // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-                model.getCurrentName().observe(getViewLifecycleOwner(), nameObserver);
+                model.getCurrentSurname().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.surnameText));
+                model.getCurrentName().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.nameText));
+                model.getCurrentBirthdate().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.birthdateText));
+                model.getCurrentNumber().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.numberText));
+                model.getCurrentMail().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.mailText));
+                //TODO observe hobbies
             }
         });
 
         return myView;
     }
 
-    // add programatically a TextView to linearLayout by using data from a bundle
-    private void addToView(LinearLayout linearLayout, Bundle theDataHolder, String dataName, int idTextView) {
+    // set text programmatically of a TextView using data from a bundle
+    private void addToView(Bundle theDataHolder, String dataName, int idTextView) {
+        Log.v("debug","adding to view");
+
         TextView myText = myView.findViewById(idTextView);//new TextView(linearLayout.getContext());
+
+        Log.v("debug","text received="+theDataHolder.getString(dataName));
 
         myText.setText(theDataHolder.getString(dataName));
         //myText.setId(View.generateViewId());
@@ -145,5 +140,23 @@ public class DisplayFragment extends Fragment {
                 LinearLayout.LayoutParams.WRAP_CONTENT));
 
         //linearLayout.addView(myText);
+    }
+
+    private Observer<String> createCustomObserver(int id) {
+        return new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable final String newName) {
+
+                //Log.v("debug","display has observed a change");
+                // Update the UI, in this case, a TextView.
+                TextView myText = myView.findViewById(id);
+
+                //Log.v("debug current display surname",myText.getText().toString());
+                //Log.v("debug display wanted surname ",myText.getText().toString());
+
+                myText.setText(newName);
+
+            }
+        };
     }
 }

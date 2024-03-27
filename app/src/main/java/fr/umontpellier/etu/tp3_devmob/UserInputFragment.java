@@ -1,5 +1,7 @@
 package fr.umontpellier.etu.tp3_devmob;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,10 @@ import android.widget.Toast;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.function.Function;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link UserInputFragment#newInstance} factory method to
@@ -28,6 +34,10 @@ public class UserInputFragment extends Fragment {
 
     private UserInputViewModel model;
     private boolean isSynchronousWithOutput = false;
+    private final ArrayList<Integer> langList = new ArrayList<>();
+    private final String[] hobbiesArray = new String[]{"Sport", "Musique", "Lecture"};
+
+    ///////////////////
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -82,45 +92,20 @@ public class UserInputFragment extends Fragment {
         this.setHintPlaceholder(myView, R.id.edit_text_mail, "tony.nguyen@etu.umontpellier.fr");
 
         model = new ViewModelProvider(this).get(UserInputViewModel.class);
-        Log.v("debug",model.toString());
-        EditText monEditText = myView.findViewById(R.id.edit_text_name);
-        monEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        //Log.v("debug",model.toString());
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                //TODO si isSynchronized true, quand le text change, post la valuer
-                Log.v("debug","after text of name changed");
-
-                Log.v("debug isChecked", String.valueOf(UserInputFragment.this.isSynchronousWithOutput));
-                if (UserInputFragment.this.isSynchronousWithOutput) {
-                    Log.v("debug","sychrone");
-                    Log.v("debug","posting change");
-                    Log.v("debug",s.toString());
-                    model.
-                            getCurrentName().
-                            postValue(((EditText) myView.findViewById(R.id.edit_text_name)).
-                                    getText().
-                                    toString());
-                } else {
-
-                }
-                //TextView t = (TextView) myView.findViewById(R.id.nameText);
-            }
-        });
+        // listening for input modification
+        addTextChangedListener(R.id.edit_text_surname,myView,"surname");
+        addTextChangedListener(R.id.edit_text_name,myView,"name");
+        addTextChangedListener(R.id.edit_text_birthdate,myView,"birthdate");
+        addTextChangedListener(R.id.edit_text_number,myView,"number");
+        addTextChangedListener(R.id.edit_text_mail,myView,"mail");
+        //addTextChangedListener(R.id.edit_hobby,myView,"mail");
 
         // button action
         myView.findViewById(R.id.submit_button).setOnClickListener(v -> {
 
-            //Toast.makeText(v.getContext(),"Form was submited",Toast.LENGTH_SHORT).show();
-
-            // FIXME LiveData
-            model.getCurrentName().postValue(((EditText) myView.findViewById(R.id.edit_text_name)).getText().toString());
+            Toast.makeText(v.getContext(),"Form was submited",Toast.LENGTH_SHORT).show();
 
             // data transmission
             // bundle result will hold the data
@@ -132,10 +117,9 @@ public class UserInputFragment extends Fragment {
             putDataInsideBundle(result, (EditText) myView.findViewById(R.id.edit_text_birthdate), "inputBirthdate");
             putDataInsideBundle(result, (EditText) myView.findViewById(R.id.edit_text_number), "inputNumber");
             putDataInsideBundle(result, (EditText) myView.findViewById(R.id.edit_text_mail), "inputMail");
-            putDataInsideBundle(result, (EditText) myView.findViewById(R.id.edit_text_mail), "inputMail");
+            putDataInsideBundle(result, (TextView) myView.findViewById(R.id.edit_hobby), "inputHobbies");
 
-            SwitchMaterial mySwitch = myView.findViewById(R.id.switch_sync);
-            this.isSynchronousWithOutput = mySwitch.isChecked();
+            this.isSynchronousWithOutput = ((SwitchMaterial) myView.findViewById(R.id.switch_sync)).isChecked();
             result.putString("isSynchron", String.valueOf(this.isSynchronousWithOutput));
             // setting up to transmit ViewModel with LiveData for synchronisation form/output
             result.putSerializable("theModel",model);
@@ -145,9 +129,13 @@ public class UserInputFragment extends Fragment {
             getParentFragmentManager().setFragmentResult("requestKey", result);
         });
 
+        // multiple choice selector
+        this.set(myView);
+
         return myView;
     }
 
+    // for a nice form
     private void setHintPlaceholder(View v, int r, String placeholder) {
         final EditText editText = (EditText) v.findViewById(r);
         editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -162,7 +150,130 @@ public class UserInputFragment extends Fragment {
         });
     }
 
+    /**
+     * for a nice selection
+     * Source : https://www.geeksforgeeks.org/how-to-implement-multiselect-dropdown-in-android/
+     *
+     * @param myView
+     */
+    private void set(View myView) {
+        TextView textView = myView.findViewById(R.id.edit_hobby);
+
+        // initialize selected language array
+        boolean[] selectedHobbies = new boolean[hobbiesArray.length];
+
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Initialize alert dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(myView.getContext());
+
+                // set title
+                builder.setTitle("Select Language");
+
+                // set dialog non cancelable
+                builder.setCancelable(false);
+
+                builder.setMultiChoiceItems(hobbiesArray, selectedHobbies, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                        // check condition
+                        if (b) {
+                            // when checkbox selected
+                            // Add position  in lang list
+                            langList.add(i);
+                            // Sort array list
+                            Collections.sort(langList);
+                        } else {
+                            // when checkbox unselected
+                            // Remove position from langList
+                            langList.remove(Integer.valueOf(i));
+                        }
+                        //TODO when change occur, notify ModelView
+                    }
+                });
+
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Initialize string builder
+                        StringBuilder stringBuilder = new StringBuilder();
+                        // use for loop
+                        for (int j = 0; j < langList.size(); j++) {
+                            // concat array value
+                            stringBuilder.append(hobbiesArray[langList.get(j)]);
+                            // check condition
+                            if (j != langList.size() - 1) {
+                                // When j value  not equal
+                                // to lang list size - 1
+                                // add comma
+                                stringBuilder.append(", ");
+                            }
+                        }
+                        // set text on textView
+                        textView.setText(stringBuilder.toString());
+                        Log.v("debug input","text="+textView.getText().toString());
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // dismiss dialog
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // use for loop
+                        for (int j = 0; j < selectedHobbies.length; j++) {
+                            // remove all selection
+                            selectedHobbies[j] = false;
+                            // clear language list
+                            langList.clear();
+                            // clear text view value
+                            textView.setText("");
+                        }
+                    }
+                });
+                // show dialog
+                builder.show();
+            }
+        });
+    }
+
+    // helper function //////////////////////////////////////
     private void putDataInsideBundle(Bundle theDataHolder, EditText editText, String dataName) {
         theDataHolder.putString(dataName, editText.getText().toString());
+    }
+
+    private void putDataInsideBundle(Bundle theDataHolder, TextView textView, String dataName) {
+        Log.v("debug input","textToSend="+textView.getText().toString());
+        theDataHolder.putString(dataName, textView.getText().toString());
+    }
+
+    // when editing form, if this.isSynchronousWithOutput is true, notify the model
+    private void addTextChangedListener(int id, View view, String aString) {
+        ((EditText) view.findViewById(id)).addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { /* not needed */ }
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) { /* not needed */ }
+            @Override
+            public void afterTextChanged(Editable s) {
+                //Log.v("debug","after text of name changed");
+
+                //Log.v("debug isChecked", String.valueOf(UserInputFragment.this.isSynchronousWithOutput));
+                if (UserInputFragment.this.isSynchronousWithOutput) {
+                    //Log.v("debug","sychrone");
+                    //Log.v("debug","posting change");
+                    //Log.v("debug",s.toString());
+                    model.
+                            get(aString).
+                            postValue(((EditText) view.findViewById(id)).
+                                    getText().
+                                    toString());
+                }
+            }
+        });
     }
 }

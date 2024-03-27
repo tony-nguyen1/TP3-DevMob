@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.io.Serializable;
 
+//TODO add hobby
 public class UserInputViewModel extends ViewModel implements Serializable {
     private MutableLiveData<String> currentSurname;
     private MutableLiveData<String> currentName;
@@ -35,5 +36,21 @@ public class UserInputViewModel extends ViewModel implements Serializable {
     public MutableLiveData<String> getCurrentMail() {
         if (currentMail == null) currentMail = new MutableLiveData<>();
         return currentMail;
+    }
+
+    public MutableLiveData<String> get(String s) {
+        switch (s) {
+            case "surname":
+                return getCurrentSurname();
+            case "name":
+                return getCurrentName();
+            case "birthdate":
+                return getCurrentBirthdate();
+            case "number":
+                return getCurrentNumber();
+            case "mail":
+                return getCurrentMail();
+        }
+        throw new RuntimeException("get of " + s + " in " + this.getClass().getSimpleName() + " is wrong ...");
     }
 }
