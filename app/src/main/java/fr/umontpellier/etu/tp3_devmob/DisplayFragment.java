@@ -1,6 +1,7 @@
 package fr.umontpellier.etu.tp3_devmob;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +21,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -119,6 +128,19 @@ public class DisplayFragment extends Fragment {
                 model.getCurrentNumber().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.numberText));
                 model.getCurrentMail().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.mailText));
                 //TODO observe hobbies
+                myView.findViewById(R.id.return_button).setOnClickListener(view -> {
+                    // Example of clearing some fields
+                    String filename = "userData.txt";
+                    String fileContents = readFile(filename);
+                    if (!fileContents.isEmpty()) {
+                        // Assuming the file contains simple text for the name. Adapt as necessary for your data format.
+                        model.setCurrentName(fileContents);
+                        // If your file contains more structured data (e.g., JSON), parse it and update the model accordingly.
+                    }
+
+                    // Notify `UserInputFragment` to update its fields based on these changes
+                });
+
             }
         });
 
@@ -158,5 +180,55 @@ public class DisplayFragment extends Fragment {
 
             }
         };
+
+    }
+
+    private void readDataFromFileAndUpdateViewModel() {
+        String filename = "userData.txt";
+        String fileContents = readFile(filename);
+
+        if (!fileContents.isEmpty()) {
+            try {
+                JSONObject jsonObject = new JSONObject(fileContents);
+
+                if (model != null) {
+                    if (jsonObject.has("surname")) {
+                        model.setCurrentSurname(jsonObject.getString("surname"));
+                    }
+                    if (jsonObject.has("name")) {
+                        model.setCurrentName(jsonObject.getString("name"));
+                    }
+                    if (jsonObject.has("birthdate")) {
+                        model.setCurrentBirthdate(jsonObject.getString("birthdate"));
+                    }
+                    if (jsonObject.has("number")) {
+                        model.setCurrentNumber(jsonObject.getString("number"));
+                    }
+                    if (jsonObject.has("mail")) {
+                        model.setCurrentMail(jsonObject.getString("mail"));
+                    }
+                    // TODO add hobbies
+                }
+            } catch (JSONException e) {
+                Log.e("DisplayFragment", "Error parsing JSON", e);
+                Toast.makeText(getContext(), "Failed to parse data", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private String readFile(String filename) {
+        StringBuilder stringBuilder = new StringBuilder();
+        try (FileInputStream fis = getContext().openFileInput(filename)) {
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+        } catch (IOException e) {
+            Log.e("DisplayFragment", "File read failed", e);
+            Toast.makeText(getContext(), "Failed to read data", Toast.LENGTH_SHORT).show();
+        }
+        return stringBuilder.toString();
     }
 }

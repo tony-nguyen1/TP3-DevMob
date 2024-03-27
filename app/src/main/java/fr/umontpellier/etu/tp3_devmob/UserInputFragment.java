@@ -1,6 +1,7 @@
 package fr.umontpellier.etu.tp3_devmob;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -21,6 +22,11 @@ import android.widget.Toast;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.function.Function;
@@ -127,6 +133,8 @@ public class UserInputFragment extends Fragment {
             // send
             // notifying fragment manager of change
             getParentFragmentManager().setFragmentResult("requestKey", result);
+            saveDataToFile();
+
         });
 
         // multiple choice selector
@@ -275,5 +283,34 @@ public class UserInputFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void saveDataToFile() {
+        // Assuming you already have a method to construct a JSONObject from the data
+        JSONObject userData = constructJsonFromData();
+        String filename = "userData.txt";
+
+        try (FileOutputStream fos = getActivity().openFileOutput(filename, Context.MODE_PRIVATE)) {
+            fos.write(userData.toString().getBytes());
+            Toast.makeText(getContext(), "Data saved successfully", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            Log.e("DisplayFragment", "File write failed", e);
+            Toast.makeText(getContext(), "Failed to save data", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private JSONObject constructJsonFromData() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("surname", model.getCurrentSurname().getValue());
+            jsonObject.put("name", model.getCurrentName().getValue());
+            jsonObject.put("birthdate", model.getCurrentBirthdate().getValue());
+            jsonObject.put("number", model.getCurrentNumber().getValue());
+            jsonObject.put("mail", model.getCurrentMail().getValue());
+            // Add other fields as necessary
+        } catch (JSONException e) {
+            Log.e("DisplayFragment", "Error creating JSON", e);
+        }
+        return jsonObject;
     }
 }
