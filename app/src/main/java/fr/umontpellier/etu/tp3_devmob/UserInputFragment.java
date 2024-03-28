@@ -103,10 +103,13 @@ public class UserInputFragment extends Fragment {
             // send
             // notifying fragment manager of change
             getParentFragmentManager().setFragmentResult("requestKey", result);
-            saveDataToFile();
-            setupSynchronizationSwitch();
         });
 
+        // button action
+        myView.findViewById(R.id.validate_button).setOnClickListener(v -> {
+            saveDataToFile();
+
+        });
         // multiple choice selector
         this.set(myView);
 
@@ -246,6 +249,7 @@ public class UserInputFragment extends Fragment {
             }
         });
     }
+/*  This part is to synchronise it instantly without cliquing submit
     private void setupSynchronizationSwitch() {
         SwitchMaterial syncSwitch = myView.findViewById(R.id.switch_sync);
         syncSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -256,7 +260,7 @@ public class UserInputFragment extends Fragment {
             }
         });
     }
-
+*/
     private void forceUpdateViewModel() {
         model.setCurrentSurname(surname.getText().toString());
         model.setCurrentName(name.getText().toString());

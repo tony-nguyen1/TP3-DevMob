@@ -8,28 +8,32 @@
     tools:context=".MainActivity">
 
         <fragment
+            android:id="@+id/userInputFragment"
             android:name="fr.umontpellier.etu.tp3_devmob.UserInputFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/guideline1"
-            tools:layout="@layout/fragment_user_input" />
+            android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline1"
+        tools:layout="@layout/fragment_user_input" />
 
         <fragment
+            android:id="@+id/displayFragment"
             android:name="fr.umontpellier.etu.tp3_devmob.DisplayFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/guideline1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout="@layout/fragment_user_input" />
+            android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout="@layout/fragment_display" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.58" />
+            app:layout_constraintGuide_percent="0.7" /> <!-- Example percentage -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

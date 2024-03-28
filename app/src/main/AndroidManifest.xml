@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TP3DevMob"
         tools:targetApi="31">
+        <service android:name=".FileDownloadService" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
