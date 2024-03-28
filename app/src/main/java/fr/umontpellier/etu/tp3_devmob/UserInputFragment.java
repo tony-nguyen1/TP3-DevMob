@@ -31,11 +31,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.function.Function;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UserInputFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class UserInputFragment extends Fragment {
 
     private UserInputViewModel model;
@@ -50,46 +45,9 @@ public class UserInputFragment extends Fragment {
     private EditText mail;
     private TextView textView;
 
-    ///////////////////
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public UserInputFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UserInputFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static UserInputFragment newInstance(String param1, String param2) {
-        UserInputFragment fragment = new UserInputFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -97,6 +55,7 @@ public class UserInputFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         myView =  inflater.inflate(R.layout.fragment_user_input, container, false);
+
         surname= myView.findViewById(R.id.edit_text_surname);
         name = myView.findViewById(R.id.edit_text_name);
         birthdate = myView.findViewById(R.id.edit_text_birthdate);
@@ -105,28 +64,25 @@ public class UserInputFragment extends Fragment {
         textView = myView.findViewById(R.id.edit_hobby);
 
 
-        this.setHintPlaceholder(myView, R.id.edit_text_surname, "Nguyen");
-        this.setHintPlaceholder(myView, R.id.edit_text_name, "Tony");
-        this.setHintPlaceholder(myView, R.id.edit_text_birthdate, "19/06/2000");
-        this.setHintPlaceholder(myView, R.id.edit_text_number, "+33123456789");
-        this.setHintPlaceholder(myView, R.id.edit_text_mail, "tony.nguyen@etu.umontpellier.fr");
+        this.setHintPlaceholder(myView, surname, "Nguyen");
+        this.setHintPlaceholder(myView, name, "Tony");
+        this.setHintPlaceholder(myView, birthdate, "19/06/2000");
+        this.setHintPlaceholder(myView, number, "+33123456789");
+        this.setHintPlaceholder(myView, mail, "tony.nguyen@etu.umontpellier.fr");
 
         model = new ViewModelProvider(this).get(UserInputViewModel.class);
         //Log.v("debug",model.toString());
 
         // listening for input modification
-        addTextChangedListener(R.id.edit_text_surname,myView,"surname");
-        addTextChangedListener(R.id.edit_text_name,myView,"name");
-        addTextChangedListener(R.id.edit_text_birthdate,myView,"birthdate");
-        addTextChangedListener(R.id.edit_text_number,myView,"number");
-        addTextChangedListener(R.id.edit_text_mail,myView,"mail");
+        addTextChangedListener( surname,myView,"surname");
+        addTextChangedListener( name,myView,"name");
+        addTextChangedListener( birthdate,myView,"birthdate");
+        addTextChangedListener( number,myView,"number");
+        addTextChangedListener( mail,myView,"mail");
         //addTextChangedListener(R.id.edit_hobby,myView,"mail");
 
         // button action
         myView.findViewById(R.id.submit_button).setOnClickListener(v -> {
-
-            Toast.makeText(v.getContext(),"Form was submited",Toast.LENGTH_SHORT).show();
-
             // data transmission
             // bundle result will hold the data
             Bundle result = new Bundle();
@@ -158,8 +114,7 @@ public class UserInputFragment extends Fragment {
     }
 
     // for a nice form
-    private void setHintPlaceholder(View v, int r, String placeholder) {
-        final EditText editText = (EditText) v.findViewById(r);
+    private void setHintPlaceholder(View v, EditText editText, String placeholder) {
         editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -173,9 +128,6 @@ public class UserInputFragment extends Fragment {
     }
 
     /**
-     * for a nice selection
-     * Source : https://www.geeksforgeeks.org/how-to-implement-multiselect-dropdown-in-android/
-     *
      * @param myView
      */
     private void set(View myView) {
@@ -274,8 +226,8 @@ public class UserInputFragment extends Fragment {
     }
 
     // when editing form, if this.isSynchronousWithOutput is true, notify the model
-    private void addTextChangedListener(int id, View view, String aString) {
-        ((EditText) view.findViewById(id)).addTextChangedListener(new TextWatcher() {
+    private void addTextChangedListener(EditText editText, View view, String aString) {
+        (editText).addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { /* not needed */ }
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) { /* not needed */ }
             @Override
@@ -287,11 +239,7 @@ public class UserInputFragment extends Fragment {
                     //Log.v("debug","sychrone");
                     //Log.v("debug","posting change");
                     //Log.v("debug",s.toString());
-                    model.
-                            get(aString).
-                            postValue(((EditText) view.findViewById(id)).
-                                    getText().
-                                    toString());
+                    model.get(aString).postValue(editText.getText().toString());
                 }
             }
         });
