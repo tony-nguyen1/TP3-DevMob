@@ -39,9 +39,16 @@ import java.util.function.Function;
 public class UserInputFragment extends Fragment {
 
     private UserInputViewModel model;
+    private View myView;
     private boolean isSynchronousWithOutput = false;
     private final ArrayList<Integer> langList = new ArrayList<>();
     private final String[] hobbiesArray = new String[]{"Sport", "Musique", "Lecture"};
+    private EditText surname;
+    private EditText name;
+    private EditText birthdate;
+    private EditText number;
+    private EditText mail;
+    private TextView textView;
 
     ///////////////////
 
@@ -89,7 +96,14 @@ public class UserInputFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View myView =  inflater.inflate(R.layout.fragment_user_input, container, false);
+        myView =  inflater.inflate(R.layout.fragment_user_input, container, false);
+        surname= myView.findViewById(R.id.edit_text_surname);
+        name = myView.findViewById(R.id.edit_text_name);
+        birthdate = myView.findViewById(R.id.edit_text_birthdate);
+        number = myView.findViewById(R.id.edit_text_number);
+        mail = myView.findViewById(R.id.edit_text_mail);
+        textView = myView.findViewById(R.id.edit_hobby);
+
 
         this.setHintPlaceholder(myView, R.id.edit_text_surname, "Nguyen");
         this.setHintPlaceholder(myView, R.id.edit_text_name, "Tony");
@@ -118,12 +132,12 @@ public class UserInputFragment extends Fragment {
             Bundle result = new Bundle();
 
             // put data
-            putDataInsideBundle(result, (EditText) myView.findViewById(R.id.edit_text_name), "inputName");
-            putDataInsideBundle(result, (EditText) myView.findViewById(R.id.edit_text_surname), "inputSurname");
-            putDataInsideBundle(result, (EditText) myView.findViewById(R.id.edit_text_birthdate), "inputBirthdate");
-            putDataInsideBundle(result, (EditText) myView.findViewById(R.id.edit_text_number), "inputNumber");
-            putDataInsideBundle(result, (EditText) myView.findViewById(R.id.edit_text_mail), "inputMail");
-            putDataInsideBundle(result, (TextView) myView.findViewById(R.id.edit_hobby), "inputHobbies");
+            putDataInsideBundle(result, name, "inputName");
+            putDataInsideBundle(result, surname, "inputSurname");
+            putDataInsideBundle(result, birthdate, "inputBirthdate");
+            putDataInsideBundle(result, number, "inputNumber");
+            putDataInsideBundle(result, mail, "inputMail");
+            putDataInsideBundle(result, textView, "inputHobbies");
 
             this.isSynchronousWithOutput = ((SwitchMaterial) myView.findViewById(R.id.switch_sync)).isChecked();
             result.putString("isSynchron", String.valueOf(this.isSynchronousWithOutput));
@@ -165,8 +179,6 @@ public class UserInputFragment extends Fragment {
      * @param myView
      */
     private void set(View myView) {
-        TextView textView = myView.findViewById(R.id.edit_hobby);
-
         // initialize selected language array
         boolean[] selectedHobbies = new boolean[hobbiesArray.length];
 
@@ -286,7 +298,6 @@ public class UserInputFragment extends Fragment {
     }
 
     private void saveDataToFile() {
-        // Assuming you already have a method to construct a JSONObject from the data
         JSONObject userData = constructJsonFromData();
         String filename = "userData.txt";
 
@@ -302,11 +313,11 @@ public class UserInputFragment extends Fragment {
     private JSONObject constructJsonFromData() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("surname", model.getCurrentSurname().getValue());
-            jsonObject.put("name", model.getCurrentName().getValue());
-            jsonObject.put("birthdate", model.getCurrentBirthdate().getValue());
-            jsonObject.put("number", model.getCurrentNumber().getValue());
-            jsonObject.put("mail", model.getCurrentMail().getValue());
+            jsonObject.put("surname", name.getText().toString());
+            jsonObject.put("name", surname.getText().toString());
+            jsonObject.put("birthdate", birthdate.getText().toString());
+            jsonObject.put("number", number.getText().toString());
+            jsonObject.put("mail", mail.getText().toString());
             // Add other fields as necessary
         } catch (JSONException e) {
             Log.e("DisplayFragment", "Error creating JSON", e);

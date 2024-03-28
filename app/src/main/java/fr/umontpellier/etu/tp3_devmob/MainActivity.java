@@ -27,8 +27,5 @@ public class MainActivity extends AppCompatActivity {
         //        .setReorderingAllowed(true)
           //      .add(R.id.myLayout, UserInputFragment.class, savedInstanceState)
             //    .commit();
-
-
-
     }
 }

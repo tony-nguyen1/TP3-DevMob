@@ -1,8 +1,5 @@
 package fr.umontpellier.etu.tp3_devmob;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -129,16 +126,7 @@ public class DisplayFragment extends Fragment {
                 model.getCurrentMail().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.mailText));
                 //TODO observe hobbies
                 myView.findViewById(R.id.return_button).setOnClickListener(view -> {
-                    // Example of clearing some fields
-                    String filename = "userData.txt";
-                    String fileContents = readFile(filename);
-                    if (!fileContents.isEmpty()) {
-                        // Assuming the file contains simple text for the name. Adapt as necessary for your data format.
-                        model.setCurrentName(fileContents);
-                        // If your file contains more structured data (e.g., JSON), parse it and update the model accordingly.
-                    }
-
-                    // Notify `UserInputFragment` to update its fields based on these changes
+                    readDataFromFileAndUpdateViewModel();
                 });
 
             }
@@ -190,10 +178,10 @@ public class DisplayFragment extends Fragment {
         if (!fileContents.isEmpty()) {
             try {
                 JSONObject jsonObject = new JSONObject(fileContents);
-
                 if (model != null) {
                     if (jsonObject.has("surname")) {
                         model.setCurrentSurname(jsonObject.getString("surname"));
+                        Log.v("debug display wanted surname ",jsonObject.getString("surname"));
                     }
                     if (jsonObject.has("name")) {
                         model.setCurrentName(jsonObject.getString("name"));
