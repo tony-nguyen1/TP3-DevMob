@@ -104,7 +104,7 @@ public class UserInputFragment extends Fragment {
             // notifying fragment manager of change
             getParentFragmentManager().setFragmentResult("requestKey", result);
             saveDataToFile();
-
+            setupSynchronizationSwitch();
         });
 
         // multiple choice selector
@@ -239,12 +239,30 @@ public class UserInputFragment extends Fragment {
                     //Log.v("debug","sychrone");
                     //Log.v("debug","posting change");
                     //Log.v("debug",s.toString());
-                    model.get(aString).postValue(editText.getText().toString());
+                    model.get(aString).postValue(s.toString());
                 }
             }
         });
     }
+    private void setupSynchronizationSwitch() {
+        SwitchMaterial syncSwitch = myView.findViewById(R.id.switch_sync);
+        syncSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            isSynchronousWithOutput = isChecked;
+            // Optionally force-update all fields upon enabling the switch
+            if(isSynchronousWithOutput) {
+                forceUpdateViewModel();
+            }
+        });
+    }
 
+    private void forceUpdateViewModel() {
+        model.setCurrentSurname(surname.getText().toString());
+        model.setCurrentName(name.getText().toString());
+        model.setCurrentBirthdate(birthdate.getText().toString());
+        model.setCurrentNumber(number.getText().toString());
+        model.setCurrentMail(mail.getText().toString());
+        // Update model for hobbies if necessary
+    }
     private void saveDataToFile() {
         JSONObject userData = constructJsonFromData();
         String filename = "userData.txt";
@@ -271,5 +289,14 @@ public class UserInputFragment extends Fragment {
             Log.e("DisplayFragment", "Error creating JSON", e);
         }
         return jsonObject;
+    }
+
+    private void initializeViews() {
+        surname = myView.findViewById(R.id.edit_text_surname);
+        name = myView.findViewById(R.id.edit_text_name);
+        birthdate = myView.findViewById(R.id.edit_text_birthdate);
+        number = myView.findViewById(R.id.edit_text_number);
+        mail = myView.findViewById(R.id.edit_text_mail);
+        textView = myView.findViewById(R.id.edit_hobby);
     }
 }
