@@ -12,6 +12,7 @@ public class UserInputViewModel extends ViewModel implements Serializable {
     private MutableLiveData<String> currentBirthdate;
     private MutableLiveData<String> currentNumber;
     private MutableLiveData<String> currentMail;
+    private MutableLiveData<String> currentHobbies;
 
     public MutableLiveData<String> getCurrentSurname() {
         if (currentSurname == null) currentSurname = new MutableLiveData<>();
@@ -36,6 +37,11 @@ public class UserInputViewModel extends ViewModel implements Serializable {
     public MutableLiveData<String> getCurrentMail() {
         if (currentMail == null) currentMail = new MutableLiveData<>();
         return currentMail;
+    }
+
+    public MutableLiveData<String> getCurrentHobbies() {
+        if (currentHobbies == null) currentHobbies = new MutableLiveData<>();
+        return currentHobbies;
     }
 
     public MutableLiveData<String> get(String s) {

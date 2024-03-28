@@ -118,6 +118,7 @@ public class DisplayFragment extends Fragment {
                 model.getCurrentBirthdate().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.birthdateText));
                 model.getCurrentNumber().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.numberText));
                 model.getCurrentMail().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.mailText));
+                model.getCurrentHobbies().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.hobbiesText));
                 //TODO observe hobbies
             }
         });

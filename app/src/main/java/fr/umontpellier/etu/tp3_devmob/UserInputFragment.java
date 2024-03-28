@@ -190,6 +190,8 @@ public class UserInputFragment extends Fragment {
                             langList.remove(Integer.valueOf(i));
                         }
                         //TODO when change occur, notify ModelView
+                        String updatedHobbiesString = textView.getText().toString();
+                        UserInputFragment.this.model.getCurrentHobbies().postValue(updatedHobbiesString);
                     }
                 });
 
