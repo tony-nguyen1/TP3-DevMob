@@ -100,15 +100,15 @@ public class DisplayFragment extends Fragment {
     private void addToView(Bundle theDataHolder, String dataName, int idTextView) {
         Log.v("debug","adding to view");
 
-        TextView myText = myView.findViewById(idTextView);//new TextView(linearLayout.getContext());
+        TextView myText = myView.findViewById(idTextView);
 
-        Log.v("debug","text received="+theDataHolder.getString(dataName));
+        Log.v("debug","text received="+theDataHolder.getString(dataName)+" key="+dataName);
 
         myText.setText(theDataHolder.getString(dataName));
-        //myText.setId(View.generateViewId());
         myText.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
+        Log.v("debug display",myText.getText().toString());
 
         //linearLayout.addView(myText);
     }

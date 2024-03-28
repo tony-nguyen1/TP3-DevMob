@@ -161,9 +161,6 @@ public class UserInputFragment extends Fragment {
                             // Remove position from langList
                             langList.remove(Integer.valueOf(i));
                         }
-                        //TODO when change occur, notify ModelView
-                        String updatedHobbiesString = textView.getText().toString();
-                        UserInputFragment.this.model.getCurrentHobby().postValue(updatedHobbiesString);
                     }
                 });
 
@@ -187,6 +184,13 @@ public class UserInputFragment extends Fragment {
                         // set text on textView
                         textView.setText(stringBuilder.toString());
                         Log.v("debug input","text="+textView.getText().toString());
+                        //TODO when change occur, notify ModelView
+                        Log.v("debug input","isSynchronousWithOutput="+isSynchronousWithOutput);
+                        if (UserInputFragment.this.isSynchronousWithOutput) {
+                            String updatedHobbiesString = textView.getText().toString();
+                            UserInputFragment.this.model.getCurrentHobby().postValue(updatedHobbiesString);
+                            Log.v("debug input","updating live");
+                        }
                     }
                 });
 
@@ -223,7 +227,7 @@ public class UserInputFragment extends Fragment {
     }
 
     private void putDataInsideBundle(Bundle theDataHolder, TextView textView, String dataName) {
-        Log.v("debug input","textToSend="+textView.getText().toString());
+        Log.v("debug input","textToSend="+textView.getText().toString()+" key="+dataName);
         theDataHolder.putString(dataName, textView.getText().toString());
     }
 
