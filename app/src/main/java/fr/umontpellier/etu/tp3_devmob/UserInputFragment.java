@@ -291,12 +291,4 @@ public class UserInputFragment extends Fragment {
         return jsonObject;
     }
 
-    private void initializeViews() {
-        surname = myView.findViewById(R.id.edit_text_surname);
-        name = myView.findViewById(R.id.edit_text_name);
-        birthdate = myView.findViewById(R.id.edit_text_birthdate);
-        number = myView.findViewById(R.id.edit_text_number);
-        mail = myView.findViewById(R.id.edit_text_mail);
-        textView = myView.findViewById(R.id.edit_hobby);
-    }
 }
