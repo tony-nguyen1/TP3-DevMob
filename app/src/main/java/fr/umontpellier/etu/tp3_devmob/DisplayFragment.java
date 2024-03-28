@@ -1,7 +1,5 @@
 package fr.umontpellier.etu.tp3_devmob;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -20,58 +18,26 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DisplayFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class DisplayFragment extends Fragment {
 
     private UserInputViewModel model;
     private View myView;
 
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public DisplayFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DisplayFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DisplayFragment newInstance(String param1, String param2) {
-        DisplayFragment fragment = new DisplayFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -118,8 +84,12 @@ public class DisplayFragment extends Fragment {
                 model.getCurrentBirthdate().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.birthdateText));
                 model.getCurrentNumber().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.numberText));
                 model.getCurrentMail().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.mailText));
-                model.getCurrentHobbies().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.hobbiesText));
+                model.getCurrentHobby().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.hobbiesText));
                 //TODO observe hobbies
+                myView.findViewById(R.id.return_button).setOnClickListener(view -> {
+                    readDataFromFileAndUpdateViewModel();
+                });
+
             }
         });
 
@@ -159,5 +129,55 @@ public class DisplayFragment extends Fragment {
 
             }
         };
+
+    }
+
+    private void readDataFromFileAndUpdateViewModel() {
+        String filename = "userData.txt";
+        String fileContents = readFile(filename);
+
+        if (!fileContents.isEmpty()) {
+            try {
+                JSONObject jsonObject = new JSONObject(fileContents);
+                if (model != null) {
+                    if (jsonObject.has("surname")) {
+                        model.setCurrentSurname(jsonObject.getString("surname"));
+                        Log.v("debug display wanted surname ",jsonObject.getString("surname"));
+                    }
+                    if (jsonObject.has("name")) {
+                        model.setCurrentName(jsonObject.getString("name"));
+                    }
+                    if (jsonObject.has("birthdate")) {
+                        model.setCurrentBirthdate(jsonObject.getString("birthdate"));
+                    }
+                    if (jsonObject.has("number")) {
+                        model.setCurrentNumber(jsonObject.getString("number"));
+                    }
+                    if (jsonObject.has("mail")) {
+                        model.setCurrentMail(jsonObject.getString("mail"));
+                    }
+                    // TODO add hobbies
+                }
+            } catch (JSONException e) {
+                Log.e("DisplayFragment", "Error parsing JSON", e);
+                Toast.makeText(getContext(), "Failed to parse data", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private String readFile(String filename) {
+        StringBuilder stringBuilder = new StringBuilder();
+        try (FileInputStream fis = getContext().openFileInput(filename)) {
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+        } catch (IOException e) {
+            Log.e("DisplayFragment", "File read failed", e);
+            Toast.makeText(getContext(), "Failed to read data", Toast.LENGTH_SHORT).show();
+        }
+        return stringBuilder.toString();
     }
 }
