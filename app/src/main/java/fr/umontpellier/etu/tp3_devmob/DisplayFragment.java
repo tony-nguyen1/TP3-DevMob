@@ -1,5 +1,9 @@
 package fr.umontpellier.etu.tp3_devmob;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -9,11 +13,13 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.Observer;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +40,12 @@ public class DisplayFragment extends Fragment {
 
     private UserInputViewModel model;
     private View myView;
-
+    private TextView TextView_surname;
+    private TextView TextView_name;
+    private TextView TextView_birthdate;
+    private TextView TextView_number;
+    private TextView TextView_mail;
+    private TextView TextView_hobbies;
 
     public DisplayFragment() {
         // Required empty public constructor
@@ -47,6 +58,12 @@ public class DisplayFragment extends Fragment {
         // Inflate the layout for this fragment
         myView = inflater.inflate(R.layout.fragment_display, container, false);
 
+        TextView_surname = myView.findViewById(R.id.surnameText);
+        TextView_name = myView.findViewById(R.id.nameText);
+        TextView_birthdate = myView.findViewById(R.id.birthdateText);
+        TextView_number = myView.findViewById(R.id.numberText);
+        TextView_mail = myView.findViewById(R.id.mailText);
+        TextView_hobbies = myView.findViewById(R.id.hobbiesText);
 
 
         // Subscribing to wait for change
@@ -179,5 +196,43 @@ public class DisplayFragment extends Fragment {
             Toast.makeText(getContext(), "Failed to read data", Toast.LENGTH_SHORT).show();
         }
         return stringBuilder.toString();
+    }
+
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d("Broadcast", "Received broadcast...");
+            String surname = intent.getStringExtra("surname");
+            String name = intent.getStringExtra("name");
+            String birthdate = intent.getStringExtra("birthdate");
+            String number = intent.getStringExtra("number");
+            String mail = intent.getStringExtra("mail");
+            Log.d("Broadcast", "Received broadcast done");
+            TextView_surname.setText(surname);
+            Log.d("setText", "First set text");
+            TextView_name.setText(name);
+            Log.d("setText", "Second set text");
+            TextView_birthdate.setText(birthdate);
+            Log.d("setText", "Theird set text");
+            TextView_number.setText(number);
+            Log.d("setText", "Forth set text");
+            TextView_mail.setText(mail);
+            Log.d("setText", "Fifth set text");
+
+        }
+
+    };
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter intentFilter = new IntentFilter("action.UPDATE_DATA");
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(mMessageReceiver, intentFilter);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(mMessageReceiver);
     }
 }
