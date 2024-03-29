@@ -69,7 +69,6 @@ public class UserInputFragment extends Fragment {
         textView = myView.findViewById(R.id.edit_hobby);
 
 
-
         this.setHintPlaceholder(myView, surname, "Nguyen");
         this.setHintPlaceholder(myView, name, "Tony");
         this.setHintPlaceholder(myView, birthdate, "19/06/2000");
@@ -77,7 +76,6 @@ public class UserInputFragment extends Fragment {
         this.setHintPlaceholder(myView, mail, "tony.nguyen@etu.umontpellier.fr");
 
         model = new ViewModelProvider(this).get(UserInputViewModel.class);
-        //Log.v("debug",model.toString());
 
         // listening for input modification
         addTextChangedListener( surname,myView,"surname");
@@ -85,7 +83,6 @@ public class UserInputFragment extends Fragment {
         addTextChangedListener( birthdate,myView,"birthdate");
         addTextChangedListener( number,myView,"number");
         addTextChangedListener( mail,myView,"mail");
-        //addTextChangedListener(R.id.edit_hobby,myView,"mail");
 
         // button SUBMIT
         myView.findViewById(R.id.submit_button).setOnClickListener(v -> {
@@ -145,9 +142,6 @@ public class UserInputFragment extends Fragment {
         });
     }
 
-    /**
-     * @param myView
-     */
     private void set(View myView) {
         // initialize selected language array
         boolean[] selectedHobbies = new boolean[hobbiesArray.length];
@@ -203,7 +197,6 @@ public class UserInputFragment extends Fragment {
                         // set text on textView
                         textView.setText(stringBuilder.toString());
                         Log.v("debug input","text="+textView.getText().toString());
-                        //TODO when change occur, notify ModelView
                         Log.v("debug input","isSynchronousWithOutput="+isSynchronousWithOutput);
                         if (UserInputFragment.this.isSynchronousWithOutput) {
                             String updatedHobbiesString = textView.getText().toString();
@@ -303,7 +296,8 @@ public class UserInputFragment extends Fragment {
             jsonObject.put("birthdate", birthdate.getText().toString());
             jsonObject.put("number", number.getText().toString());
             jsonObject.put("mail", mail.getText().toString());
-            // Add other fields as necessary
+            //TODO hobbies
+            //jsonObject.put("hobbies",***).getTest().toString());
         } catch (JSONException e) {
             Log.e("DisplayFragment", "Error creating JSON", e);
         }

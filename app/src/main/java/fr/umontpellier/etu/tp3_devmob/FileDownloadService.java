@@ -51,6 +51,7 @@ public class FileDownloadService extends IntentService {
                     intent.putExtra("birthdate", jsonObject.getString("birthdate"));
                     intent.putExtra("number", jsonObject.getString("number"));
                     intent.putExtra("mail", jsonObject.getString("mail"));
+                    intent.putExtra("hobbies", jsonObject.getString("hobbies"));
                     LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
                 } catch (IOException | JSONException e) {
                     Log.e("FileDownloadService", "Error reading or parsing file", e);

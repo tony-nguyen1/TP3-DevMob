@@ -102,7 +102,7 @@ public class DisplayFragment extends Fragment {
                 model.getCurrentNumber().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.numberText));
                 model.getCurrentMail().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.mailText));
                 model.getCurrentHobby().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.hobbiesText));
-                //TODO observe hobbies
+
                 myView.findViewById(R.id.return_button).setOnClickListener(view -> {
                     readDataFromFileAndUpdateViewModel();
                 });
@@ -173,7 +173,9 @@ public class DisplayFragment extends Fragment {
                     if (jsonObject.has("mail")) {
                         model.setCurrentMail(jsonObject.getString("mail"));
                     }
-                    // TODO add hobbies
+                    if(jsonObject.has("hobbies")){
+                        model.setCurrentHobby(jsonObject.getString("hobbies"));
+                    }
                 }
             } catch (JSONException e) {
                 Log.e("DisplayFragment", "Error parsing JSON", e);
@@ -207,18 +209,14 @@ public class DisplayFragment extends Fragment {
             String birthdate = intent.getStringExtra("birthdate");
             String number = intent.getStringExtra("number");
             String mail = intent.getStringExtra("mail");
-            Log.d("Broadcast", "Received broadcast done");
-            TextView_surname.setText(surname);
-            Log.d("setText", "First set text");
-            TextView_name.setText(name);
-            Log.d("setText", "Second set text");
-            TextView_birthdate.setText(birthdate);
-            Log.d("setText", "Theird set text");
-            TextView_number.setText(number);
-            Log.d("setText", "Forth set text");
-            TextView_mail.setText(mail);
-            Log.d("setText", "Fifth set text");
+            String hobbies = intent.getStringExtra("hobbies");
 
+            TextView_surname.setText(surname);
+            TextView_name.setText(name);
+            TextView_birthdate.setText(birthdate);
+            TextView_number.setText(number);
+            TextView_mail.setText(mail);
+            TextView_hobbies.setText(hobbies);
         }
 
     };
