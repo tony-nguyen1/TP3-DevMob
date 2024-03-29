@@ -48,7 +48,7 @@ public class UserInputFragment extends Fragment {
     private EditText birthdate;
     private EditText number;
     private EditText mail;
-    private TextView textView;
+    private TextView hobby;
 
 
     public UserInputFragment() {
@@ -66,7 +66,7 @@ public class UserInputFragment extends Fragment {
         birthdate = myView.findViewById(R.id.edit_text_birthdate);
         number = myView.findViewById(R.id.edit_text_number);
         mail = myView.findViewById(R.id.edit_text_mail);
-        textView = myView.findViewById(R.id.edit_hobby);
+        hobby = myView.findViewById(R.id.edit_hobby);
 
 
         this.setHintPlaceholder(myView, surname, "Nguyen");
@@ -96,7 +96,7 @@ public class UserInputFragment extends Fragment {
             putDataInsideBundle(result, birthdate, "inputBirthdate");
             putDataInsideBundle(result, number, "inputNumber");
             putDataInsideBundle(result, mail, "inputMail");
-            putDataInsideBundle(result, textView, "inputHobbies");
+            putDataInsideBundle(result, hobby, "inputHobbies");
 
             this.isSynchronousWithOutput = ((SwitchMaterial) myView.findViewById(R.id.switch_sync)).isChecked();
             result.putString("isSynchron", String.valueOf(this.isSynchronousWithOutput));
@@ -106,6 +106,8 @@ public class UserInputFragment extends Fragment {
             // send
             // notifying fragment manager of change
             getParentFragmentManager().setFragmentResult("requestKey", result);
+
+            Toast.makeText(getContext(), "Input submitted" + (this.isSynchronousWithOutput ? " (w/ sync on)" :""), Toast.LENGTH_SHORT).show();
         });
 
         // button SAVE
@@ -146,7 +148,7 @@ public class UserInputFragment extends Fragment {
         // initialize selected language array
         boolean[] selectedHobbies = new boolean[hobbiesArray.length];
 
-        textView.setOnClickListener(new View.OnClickListener() {
+        hobby.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -195,11 +197,11 @@ public class UserInputFragment extends Fragment {
                             }
                         }
                         // set text on textView
-                        textView.setText(stringBuilder.toString());
-                        Log.v("debug input","text="+textView.getText().toString());
+                        hobby.setText(stringBuilder.toString());
+                        Log.v("debug input","text="+hobby.getText().toString());
                         Log.v("debug input","isSynchronousWithOutput="+isSynchronousWithOutput);
                         if (UserInputFragment.this.isSynchronousWithOutput) {
-                            String updatedHobbiesString = textView.getText().toString();
+                            String updatedHobbiesString = hobby.getText().toString();
                             UserInputFragment.this.model.getCurrentHobby().postValue(updatedHobbiesString);
                             Log.v("debug input","updating live");
                         }
@@ -223,7 +225,7 @@ public class UserInputFragment extends Fragment {
                             // clear language list
                             langList.clear();
                             // clear text view value
-                            textView.setText("");
+                            hobby.setText("");
                         }
                     }
                 });
@@ -296,8 +298,8 @@ public class UserInputFragment extends Fragment {
             jsonObject.put("birthdate", birthdate.getText().toString());
             jsonObject.put("number", number.getText().toString());
             jsonObject.put("mail", mail.getText().toString());
-            //TODO hobbies
-            //jsonObject.put("hobbies",***).getTest().toString());
+            // from the TextView, get the string shown on screen
+            jsonObject.put("hobbies", hobby.getText().toString());
         } catch (JSONException e) {
             Log.e("DisplayFragment", "Error creating JSON", e);
         }
