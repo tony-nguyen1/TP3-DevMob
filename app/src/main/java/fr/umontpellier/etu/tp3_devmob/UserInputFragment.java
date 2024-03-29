@@ -1,14 +1,19 @@
 package fr.umontpellier.etu.tp3_devmob;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -64,6 +69,7 @@ public class UserInputFragment extends Fragment {
         textView = myView.findViewById(R.id.edit_hobby);
 
 
+
         this.setHintPlaceholder(myView, surname, "Nguyen");
         this.setHintPlaceholder(myView, name, "Tony");
         this.setHintPlaceholder(myView, birthdate, "19/06/2000");
@@ -81,7 +87,7 @@ public class UserInputFragment extends Fragment {
         addTextChangedListener( mail,myView,"mail");
         //addTextChangedListener(R.id.edit_hobby,myView,"mail");
 
-        // button action
+        // button SUBMIT
         myView.findViewById(R.id.submit_button).setOnClickListener(v -> {
             // data transmission
             // bundle result will hold the data
@@ -105,7 +111,7 @@ public class UserInputFragment extends Fragment {
             getParentFragmentManager().setFragmentResult("requestKey", result);
         });
 
-        // button action
+        // button SAVE
         myView.findViewById(R.id.validate_button).setOnClickListener(v -> {
             saveDataToFile();
 
@@ -113,6 +119,15 @@ public class UserInputFragment extends Fragment {
         // multiple choice selector
         this.set(myView);
 
+
+        myView.findViewById(R.id.upload_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent serviceIntent = new Intent(getActivity(), FileDownloadService.class);
+                getActivity().startService(serviceIntent);
+            }
+        });
         return myView;
     }
 
@@ -140,6 +155,7 @@ public class UserInputFragment extends Fragment {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 // Initialize alert dialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(myView.getContext());
 
@@ -261,14 +277,7 @@ public class UserInputFragment extends Fragment {
         });
     }
 */
-    private void forceUpdateViewModel() {
-        model.setCurrentSurname(surname.getText().toString());
-        model.setCurrentName(name.getText().toString());
-        model.setCurrentBirthdate(birthdate.getText().toString());
-        model.setCurrentNumber(number.getText().toString());
-        model.setCurrentMail(mail.getText().toString());
-        // Update model for hobbies if necessary
-    }
+
     private void saveDataToFile() {
         JSONObject userData = constructJsonFromData();
         String filename = "userData.txt";
@@ -296,5 +305,7 @@ public class UserInputFragment extends Fragment {
         }
         return jsonObject;
     }
+
+
 
 }
