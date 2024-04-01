@@ -51,21 +51,93 @@
 
     \newpage
     \begin{multicols}{2}
-        % [
+        [
+            To Do
+            \begin{itemize}
+                \item diagram use case
+                \item diagram sequence for synchronisation
+                \item diagram state machine w/ tikz library to describe save function
+                \item add code picture
+                \item add smartphone picture
+                \item ask Satea for part 2 \& 3 explanation
+                \item !!! make an .apk file for easy install, no compilation !!!
+                \item diagram class observer
+                \item diagram class observer specific (Fragment Manager)
+            \end{itemize}
         %     Faire une vidéo, le rapport avec des screenshot des résultats et du code et enfin un read.md(instruction). En plus, pour le bonus, faire une belle application, des tests unitaires, utiliser Kotlin, faire le rapport en Latex.
-        % ]
+        ]
         \section*{Introduction}
-        \addcontentsline{toc}{section}{Introduction}
+            \addcontentsline{toc}{section}{Introduction}
+            \paragraph{}
+                Dans le cadre de l'Unité d'Enseignement Programmation Mobile, nous allons voir comment utiliser des fragments et la persistance des données.
+            \paragraph{}
+                Les sections du rapport suit les exercices.
         \section*{Démonstration vidéo}
-        \addcontentsline{toc}{section}{Démonstration}
-
+            \addcontentsline{toc}{section}{Démonstration}
         \section{Fragment}
-            Work In Progress - Almost Done
+            \paragraph{}
+                Un fragment est une portion réutilisable de l'interface utilisateur de notre application. Ils sont utiles car ils sont modulaires et réutilisables. 
+            \paragraph{}
+                Dans cette section, nous allons voir comment les créer, les afficher et comment les faire communiquer entre eux.
             \subsection{Création}
+                \paragraph{}
+                    Afin de créer un nouveau fragment, il nous suffit d'hériter de la classe de base Android : "\emph{Fragment}".
+
+                    Pour spécifier le comportement du nouveau fragment, il nous suffira de masquer la méthode \textbf{onCreateView()}.
+
+                    Dans ce TP, nous avons créer 2 fragments, \textbf{UserInputFragment} et \textbf{DisplayFragment}.
+
+                    (UserInputFragment, DisplayFragment extends Fragment)
+            \subsection{Ajout}
+                \paragraph{}
+                    Pour pouvoir les afficher, nous avons créer une activity et son layout vide.
+                    
+                    Nous avons ensuite, ajouté une balise \textbf{fragment} pour chaque fragment crée. Il faut remarquer 2 attributs important.
+
+                    L'attribut \textbf{android:name} associe cette balise .xml à aux classe fragment crée dans la sous-section précédente.
+
+                    L'attribut \textbf{tools:layout} associe cette balise au layout indiqué.
+
+                    Nous savons à présent comment créer un fragment, et l'afficher.
+                    
+                    tag fragment - attribut name pour la classe et attribut layout pour la vue
+                    \\
+                    Start\_toStartOf
+                    Top\_toTopOf 
+                    ...
+            
             \subsection{Couper l'écran en 2}
                 C'était trop dur.
             \subsection{Communication entre fragment}
+                \paragraph{}
+                    Avant la communication, il est nécessaire de créer un \emph Bundle qui contiendra toutes les informations à transmettre.
+                \paragraph{}
+                    Une fois, les informations placé dans le \emph Bundle, nous pouvons envoyer le message. Pour faire cela, nous utilisons la méthode \textbf{setFragmentResult(String requestKey, Bundle result)} pour envoyer les données (contenus dans le bundle avec requestKey une chaine de charactères fixés à l'avance par le programmeur, le fragment receveur devra utiliser la même requestKey).
+                
+                \paragraph{}
+                    Le message est maintenant envoyé, nous allons voir comment le recevoir.
+
+                    Il sera nécessaire d'utiliser la méthode \textbf{setFragmentResultListener(@NonNull String requestKey, @NonNull LifecycleOwner lifecycleOwner, @NonNull FragmentResultListener listener)} de la classe \emph{FragmentManager}.
+
+                    L'argument listener sera une classe anonyme qui hérite de \emph{FragmentResultListener} dans laquelle on masque la méthode \textbf{onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle)}. Si nous avons bien utilisé les même requestKey, alors bundle contiendra les bonnes données. À partir de là, nous mettons simplement ces informations dans des \emph{<TextView>}. 
+
+                    to send
+                \\
+                getParentFragmentManager().setFragmentResult(keyString, aBundle)
+                \\
+                to receive
+                \\
+                getParentFragmentManager().setFragmentResultListener() with same keyString in parameter 
             \subsection{La synchronisation}
+                \paragraph{}
+                    Posting
+                    \\
+                    ViewModel - MutableLiveData - get the MutableLiveData from ViewModel then MutableLiveData.postValue()
+                \paragraph{}
+                    Receiving
+                    \\
+                    get the MutableLiveData from ViewModel and observe
+            \subsection{Observer}
         \section{Persistance}
             \subsection{Persistance}
             \subsection{Saisie automatique}
@@ -76,6 +148,5 @@
         \section{Bonus: ViewModel}
         \section{Bonus: LiveData}
         \section{Bonus: Room}
-
     \end{multicols}
 \end{document}

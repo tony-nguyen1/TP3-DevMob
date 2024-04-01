@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.19)  22 MAR 2024 20:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.19)  1 APR 2024 17:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -436,36 +436,47 @@ Package pdftex.def Info: rapport/img//power.png  used on input line 42.
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./rapport/img//power.png>]
  (rapport//rapport.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 5.
+(Font)              <7> on input line 9.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 5.
+(Font)              <5> on input line 9.
 )
 \tf@toc=\write3
 \openout3 = `rapport.toc'.
 
- [2] [3] (rapport//rapport.aux) ) 
+ [2]
+Overfull \hbox (40.9242pt too wide) in paragraph at lines 124--131
+\T1/cmr/m/n/10 getParentFragmentManager().setFragmentResult(keyString,
+ []
+
+
+Overfull \hbox (35.8421pt too wide) in paragraph at lines 124--131
+\T1/cmr/m/n/10 getParentFragmentManager().setFragmentResultListener()
+ []
+
+[3] [4] (rapport//rapport.aux) ) 
 Here is how much of TeX's memory you used:
- 10791 strings out of 479551
- 172063 string characters out of 5876172
- 479488 words of memory out of 5000000
- 28632 multiletter control sequences out of 15000+600000
- 480296 words of font info for 48 fonts, out of 8000000 for 9000
+ 10811 strings out of 479551
+ 172269 string characters out of 5876172
+ 489488 words of memory out of 5000000
+ 28637 multiletter control sequences out of 15000+600000
+ 480982 words of font info for 49 fonts, out of 8000000 for 9000
  395 hyphenation exceptions out of 8191
- 60i,6n,63p,430b,446s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/tony/.texlive2021/texmf-var/fonts/pk/l
-jfour/jknappen/ec/ecbx1200.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/l
-jfour/jknappen/ec/ecbx1000.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/l
-jfour/jknappen/ec/ecbx1440.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/l
-jfour/jknappen/ec/ecrm1000.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/l
-jfour/jknappen/ec/ecti0900.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/l
-jfour/jknappen/ec/ecbx0900.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/l
-jfour/jknappen/ec/ecti1200.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/l
-jfour/jknappen/ec/ecrm1200.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/l
-jfour/jknappen/ec/ecrm1728.600pk>
-Output written on rapport//rapport.pdf (3 pages, 437699 bytes).
+ 60i,6n,63p,455b,493s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/tony/.texlive2021/texmf-var/fonts/pk/lj
+four/jknappen/ec/ecti1000.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
+four/jknappen/ec/ecbx1200.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
+four/jknappen/ec/ecbx1000.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
+four/jknappen/ec/ecbx1440.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
+four/jknappen/ec/ecrm1000.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
+four/jknappen/ec/ecti0900.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
+four/jknappen/ec/ecbx0900.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
+four/jknappen/ec/ecti1200.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
+four/jknappen/ec/ecrm1200.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
+four/jknappen/ec/ecrm1728.600pk>
+Output written on rapport//rapport.pdf (4 pages, 463223 bytes).
 PDF statistics:
- 386 PDF objects out of 1000 (max. 8388607)
- 138 compressed objects within 2 object streams
- 21 named destinations out of 1000 (max. 500000)
- 134 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 489 PDF objects out of 1000 (max. 8388607)
+ 167 compressed objects within 2 object streams
+ 35 named destinations out of 1000 (max. 500000)
+ 150 words of extra memory for PDF output out of 10000 (max. 10000000)
 
