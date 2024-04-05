@@ -10,13 +10,15 @@
         <fragment
             android:id="@+id/userInputFragment"
             android:name="fr.umontpellier.etu.tp3_devmob.UserInputFragment"
-            android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline1"
-        tools:layout="@layout/fragment_user_input" />
+            android:layout_width="419dp"
+            android:layout_height="466dp"
+            app:layout_constraintBottom_toTopOf="@id/guideline1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout="@layout/fragment_user_input" />
 
         <fragment
             android:id="@+id/displayFragment"
@@ -34,6 +36,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.7" /> <!-- Example percentage -->
+            app:layout_constraintGuide_percent="0.67" /> <!-- Example percentage -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
