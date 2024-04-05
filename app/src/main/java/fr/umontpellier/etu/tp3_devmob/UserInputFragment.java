@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
@@ -314,5 +315,40 @@ public class UserInputFragment extends Fragment {
             Log.e("YourFragment", "Error writing JSON to file", e);
         }
     }
+
+    /**********  Saving data for presestance (when we leave the app)  *******/
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.v("debug presistancy","Starting to save...");
+        // Save the current state of your form or other data you need to preserve
+        outState.putString("KEY_SURNAME", surname.getText().toString());
+        outState.putString("KEY_NAME", name.getText().toString());
+        outState.putString("KEY_BIRTHDATE", birthdate.getText().toString());
+        outState.putString("KEY_NUMBER", number.getText().toString());
+        outState.putString("KEY_MAIL", mail.getText().toString());
+        outState.putString("KEY_HOBBIES", hobby.getText().toString());
+        Log.v("debug presistancy","Values are saved...");
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Initialize your views here if not already done
+        Log.v("debug presistancy","Recovering the values...");
+        if (savedInstanceState != null) {
+            // Restore state here
+
+            surname.setText(savedInstanceState.getString("KEY_SURNAME"));
+            name.setText(savedInstanceState.getString("KEY_NAME"));
+            birthdate.setText(savedInstanceState.getString("KEY_BIRTHDATE"));
+            number.setText(savedInstanceState.getString("KEY_NUMBER"));
+            mail.setText(savedInstanceState.getString("KEY_MAIL"));
+            hobby.setText(savedInstanceState.getString("KEY_HOBBIES"));
+        }
+        Log.v("debug presistancy","Values recoverd...");
+    }
+
 
 }
