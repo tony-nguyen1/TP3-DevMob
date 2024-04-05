@@ -18,9 +18,9 @@
     filecolor=magenta,      
     urlcolor=red
     }
-% \urlstyle{same} % ça sert à rien ce truc
 \usepackage{bookmark}
 \usepackage{blindtext}
+\setlength\columnsep{30pt}
 
 
 
@@ -127,9 +127,12 @@
                 \\
                 to receive
                 \\
-                getParentFragmentManager().setFragmentResultListener() with same keyString in parameter 
+                getParentFragmentManager() setFragmentResultListener() with same keyString in parameter 
             \subsection{La synchronisation}
                 \paragraph{}
+                    Détection des changements
+                \paragraph{}
+                    Lors de la détection d'un changements, nous souhaitons publié le changement et mettre à jour la vue. Pour cela, nous allons accéder aux différents \emph{MutableLiveData} dans notre \emph{ModelView} : \emph{UserInputViewModel}. Une fois fait, nous publions simplement la nouvelle valeur avec la méthode \textbf{postValue()};
                     Posting
                     \\
                     ViewModel - MutableLiveData - get the MutableLiveData from ViewModel then MutableLiveData.postValue()
@@ -137,7 +140,14 @@
                     Receiving
                     \\
                     get the MutableLiveData from ViewModel and observe
+                    \\
+                    Quand l'observateur est notifié, la \emph{<TextView>} associé prend la nouvelle valeur.
             \subsection{Observer}
+                To Do
+                \begin{itemize}
+                    \item diagram class observer
+                    \item diagram class observer specific (Fragment Manager)
+                \end{itemize}
         \section{Persistance}
             \subsection{Persistance}
             \subsection{Saisie automatique}

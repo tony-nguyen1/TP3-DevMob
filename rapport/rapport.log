@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.19)  1 APR 2024 17:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.19)  2 APR 2024 15:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -444,24 +444,29 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \openout3 = `rapport.toc'.
 
  [2]
-Overfull \hbox (40.9242pt too wide) in paragraph at lines 124--131
+Underfull \hbox (badness 10000) in paragraph at lines 111--111
+[]\T1/cmr/bx/n/12 Communication entre frag-
+ []
+
+
+Overfull \hbox (50.9242pt too wide) in paragraph at lines 124--131
 \T1/cmr/m/n/10 getParentFragmentManager().setFragmentResult(keyString,
  []
 
 
-Overfull \hbox (35.8421pt too wide) in paragraph at lines 124--131
-\T1/cmr/m/n/10 getParentFragmentManager().setFragmentResultListener()
+Underfull \hbox (badness 10000) in paragraph at lines 124--131
+\T1/cmr/m/n/10 getParentFragmentManager() set-Frag-men-tRe-
  []
 
 [3] [4] (rapport//rapport.aux) ) 
 Here is how much of TeX's memory you used:
- 10811 strings out of 479551
- 172269 string characters out of 5876172
+ 10814 strings out of 479551
+ 172303 string characters out of 5876172
  489488 words of memory out of 5000000
- 28637 multiletter control sequences out of 15000+600000
+ 28639 multiletter control sequences out of 15000+600000
  480982 words of font info for 49 fonts, out of 8000000 for 9000
  395 hyphenation exceptions out of 8191
- 60i,6n,63p,455b,493s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,6n,63p,455b,491s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/tony/.texlive2021/texmf-var/fonts/pk/lj
 four/jknappen/ec/ecti1000.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
 four/jknappen/ec/ecbx1200.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
@@ -473,10 +478,10 @@ four/jknappen/ec/ecbx0900.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
 four/jknappen/ec/ecti1200.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
 four/jknappen/ec/ecrm1200.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
 four/jknappen/ec/ecrm1728.600pk>
-Output written on rapport//rapport.pdf (4 pages, 463223 bytes).
+Output written on rapport//rapport.pdf (4 pages, 467905 bytes).
 PDF statistics:
- 489 PDF objects out of 1000 (max. 8388607)
- 167 compressed objects within 2 object streams
- 35 named destinations out of 1000 (max. 500000)
+ 505 PDF objects out of 1000 (max. 8388607)
+ 169 compressed objects within 2 object streams
+ 36 named destinations out of 1000 (max. 500000)
  150 words of extra memory for PDF output out of 10000 (max. 10000000)
 

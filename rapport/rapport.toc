@@ -18,6 +18,7 @@
 \contentsline {subsection}{\numberline {1.5}La synchronisation}{4}{subsection.1.5}%
 \contentsline {paragraph}{}{4}{section*.13}%
 \contentsline {paragraph}{}{4}{section*.14}%
+\contentsline {paragraph}{}{4}{section*.15}%
 \contentsline {subsection}{\numberline {1.6}Observer}{4}{subsection.1.6}%
 \contentsline {section}{\numberline {2}Persistance}{4}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Persistance}{4}{subsection.2.1}%
