@@ -65,6 +65,17 @@ public class DisplayFragment extends Fragment {
         TextView_mail = myView.findViewById(R.id.mailText);
         TextView_hobbies = myView.findViewById(R.id.hobbiesText);
 
+        getParentFragmentManager().setFragmentResultListener("Hello", this, new FragmentResultListener() {
+            @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
+                Log.v("debug display","received model");
+
+                // so both fragment source and target have same UserInputViewModel
+                model = (UserInputViewModel) bundle.getSerializable("the_model");
+            }
+        });
+
 
         // Subscribing to wait for change
         // When another fragment setResult() with same requestKey, do this ->
@@ -74,19 +85,6 @@ public class DisplayFragment extends Fragment {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
                 Log.v("debug display","received");
-
-                // We set the text inside the empty TextView
-                addToView(bundle,"inputSurname",R.id.surnameText);
-                addToView(bundle,"inputName",R.id.nameText);
-                addToView(bundle,"inputBirthdate",R.id.birthdateText);
-                addToView(bundle,"inputNumber",R.id.numberText);
-                addToView(bundle,"inputMail",R.id.mailText);
-                addToView(bundle,"inputHobbies", R.id.hobbiesText);
-                //addToView(bundle,"isSynchron");
-
-                // so both fragment source and target have same UserInputViewModel
-                model = (UserInputViewModel) bundle.getSerializable("theModel");
-
 
                 // Then, we listen for change through our ViewModel, and edit our TextView accordingly inside onChanged()
                 assert model != null;

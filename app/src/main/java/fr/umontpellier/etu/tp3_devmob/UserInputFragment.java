@@ -76,6 +76,10 @@ public class UserInputFragment extends Fragment {
         this.setHintPlaceholder(myView, mail, "tony.nguyen@etu.umontpellier.fr");
 
         model = new ViewModelProvider(this).get(UserInputViewModel.class);
+        Bundle myMessage = new Bundle();
+        // setting up to transmit ViewModel with LiveData for synchronisation form/output
+        myMessage.putSerializable("the_model",model);
+        getParentFragmentManager().setFragmentResult("Hello", myMessage);
 
         // listening for input modification
         addTextChangedListener( surname,myView,"surname");
@@ -90,18 +94,16 @@ public class UserInputFragment extends Fragment {
             // bundle result will hold the data
             Bundle result = new Bundle();
 
-            // put data
-            putDataInsideBundle(result, name, "inputName");
-            putDataInsideBundle(result, surname, "inputSurname");
-            putDataInsideBundle(result, birthdate, "inputBirthdate");
-            putDataInsideBundle(result, number, "inputNumber");
-            putDataInsideBundle(result, mail, "inputMail");
-            putDataInsideBundle(result, hobby, "inputHobbies");
+            Log.v("debug","posting change");
+            model.get("surname").postValue(surname.getText().toString());
+                model.get("name").postValue(name.getText().toString());
+                model.get("birthdate").postValue(birthdate.getText().toString());
+                model.get("number").postValue(number.getText().toString());
+                model.get("mail").postValue(mail.getText().toString());
+                model.get("hobby").postValue(hobby.getText().toString());
 
             this.isSynchronousWithOutput = ((SwitchMaterial) myView.findViewById(R.id.switch_sync)).isChecked();
             result.putString("isSynchron", String.valueOf(this.isSynchronousWithOutput));
-            // setting up to transmit ViewModel with LiveData for synchronisation form/output
-            result.putSerializable("theModel",model);
 
             // send
             // notifying fragment manager of change
@@ -109,6 +111,10 @@ public class UserInputFragment extends Fragment {
 
             Toast.makeText(getContext(), "Input submitted" + (this.isSynchronousWithOutput ? " (w/ sync on)" :""), Toast.LENGTH_SHORT).show();
         });
+
+        Bundle result = new Bundle();
+        result.putSerializable("theModel",model);
+        getParentFragmentManager().setFragmentResult("firstExchange", result);
 
         // button SAVE
         myView.findViewById(R.id.validate_button).setOnClickListener(v -> {
