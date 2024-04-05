@@ -76,9 +76,13 @@ public class UserInputFragment extends Fragment {
         this.setHintPlaceholder(myView, mail, "tony.nguyen@etu.umontpellier.fr");
 
         model = new ViewModelProvider(this).get(UserInputViewModel.class);
+        // data transmission
+        // bundle myMessage will hold the data
         Bundle myMessage = new Bundle();
         // setting up to transmit ViewModel with LiveData for synchronisation form/output
         myMessage.putSerializable("the_model",model);
+        // send
+        // notifying fragment manager of change
         getParentFragmentManager().setFragmentResult("Hello", myMessage);
 
         // listening for input modification
@@ -90,10 +94,6 @@ public class UserInputFragment extends Fragment {
 
         // button SUBMIT
         myView.findViewById(R.id.submit_button).setOnClickListener(v -> {
-            // data transmission
-            // bundle result will hold the data
-            Bundle result = new Bundle();
-
             Log.v("debug","posting change");
             model.get("surname").postValue(surname.getText().toString());
                 model.get("name").postValue(name.getText().toString());
@@ -103,11 +103,6 @@ public class UserInputFragment extends Fragment {
                 model.get("hobby").postValue(hobby.getText().toString());
 
             this.isSynchronousWithOutput = ((SwitchMaterial) myView.findViewById(R.id.switch_sync)).isChecked();
-            result.putString("isSynchron", String.valueOf(this.isSynchronousWithOutput));
-
-            // send
-            // notifying fragment manager of change
-            getParentFragmentManager().setFragmentResult("requestKey", result);
 
             Toast.makeText(getContext(), "Input submitted" + (this.isSynchronousWithOutput ? " (w/ sync on)" :""), Toast.LENGTH_SHORT).show();
         });
