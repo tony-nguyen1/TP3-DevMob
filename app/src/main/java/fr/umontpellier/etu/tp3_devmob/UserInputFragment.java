@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
@@ -30,7 +31,9 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -113,14 +116,14 @@ public class UserInputFragment extends Fragment {
 
         // button SAVE
         myView.findViewById(R.id.validate_button).setOnClickListener(v -> {
-            saveDataToFile();
+            saveJsonToFile();
 
         });
         // multiple choice selector
         this.set(myView);
 
 
-        myView.findViewById(R.id.upload_button).setOnClickListener(new View.OnClickListener() {
+        myView.findViewById(R.id.load_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -277,36 +280,76 @@ public class UserInputFragment extends Fragment {
         });
     }
 */
-
-    private void saveDataToFile() {
-        JSONObject userData = constructJsonFromData();
-        String filename = "userData.txt";
-
-        try (FileOutputStream fos = getActivity().openFileOutput(filename, Context.MODE_PRIVATE)) {
-            fos.write(userData.toString().getBytes());
-            Toast.makeText(getContext(), "Data saved successfully", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            Log.e("DisplayFragment", "File write failed", e);
-            Toast.makeText(getContext(), "Failed to save data", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     private JSONObject constructJsonFromData() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("surname", name.getText().toString());
-            jsonObject.put("name", surname.getText().toString());
+            jsonObject.put("surname", surname.getText().toString());
+            jsonObject.put("name", name.getText().toString());
             jsonObject.put("birthdate", birthdate.getText().toString());
             jsonObject.put("number", number.getText().toString());
             jsonObject.put("mail", mail.getText().toString());
-            // from the TextView, get the string shown on screen
             jsonObject.put("hobbies", hobby.getText().toString());
         } catch (JSONException e) {
             Log.e("DisplayFragment", "Error creating JSON", e);
         }
         return jsonObject;
     }
+    private void saveJsonToFile() {
+        Context context = getContext();
+        if(context == null) {
+            Log.e("YourFragment", "Context is null, cannot save JSON");
+            return;
+        }
 
+        // Construct your JSON object
+        JSONObject jsonObject = constructJsonFromData();
+
+        // Get the external files directory
+        File  basePath = context.getExternalFilesDir(null);
+        File file = new File(basePath , "test.json");
+        Log.d("YourFragment", "Starting to write JSON to " + file.getAbsolutePath());
+        // Write the JSON object to the file
+        try (FileWriter fileWriter = new FileWriter(file)) {
+            fileWriter.write(jsonObject.toString());
+            Log.d("YourFragment", "Successfully written JSON to " + file.getAbsolutePath());
+        } catch (IOException e) {
+            Log.e("YourFragment", "Error writing JSON to file", e);
+        }
+    }
+
+    /**********  Saving data for presestance (when we leave the app)  *******/
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.v("debug presistancy","Starting to save...");
+        // Save the current state of your form or other data you need to preserve
+        outState.putString("KEY_SURNAME", surname.getText().toString());
+        outState.putString("KEY_NAME", name.getText().toString());
+        outState.putString("KEY_BIRTHDATE", birthdate.getText().toString());
+        outState.putString("KEY_NUMBER", number.getText().toString());
+        outState.putString("KEY_MAIL", mail.getText().toString());
+        outState.putString("KEY_HOBBIES", hobby.getText().toString());
+        Log.v("debug presistancy","Values are saved...");
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Initialize your views here if not already done
+        Log.v("debug presistancy","Recovering the values...");
+        if (savedInstanceState != null) {
+            // Restore state here
+
+            surname.setText(savedInstanceState.getString("KEY_SURNAME"));
+            name.setText(savedInstanceState.getString("KEY_NAME"));
+            birthdate.setText(savedInstanceState.getString("KEY_BIRTHDATE"));
+            number.setText(savedInstanceState.getString("KEY_NUMBER"));
+            mail.setText(savedInstanceState.getString("KEY_MAIL"));
+            hobby.setText(savedInstanceState.getString("KEY_HOBBIES"));
+        }
+        Log.v("debug presistancy","Values recoverd...");
+    }
 
 
 }

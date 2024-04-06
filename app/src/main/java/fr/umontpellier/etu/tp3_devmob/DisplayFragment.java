@@ -19,21 +19,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
 
 
 public class DisplayFragment extends Fragment {
@@ -110,63 +98,9 @@ public class DisplayFragment extends Fragment {
 
                 //Log.v("debug current display surname",myText.getText().toString());
                 //Log.v("debug display wanted surname ",myText.getText().toString());
-
                 myText.setText(newName);
-
             }
         };
-
-    }
-
-    private void readDataFromFileAndUpdateViewModel() {
-        String filename = "userData.txt";
-        String fileContents = readFile(filename);
-
-        if (!fileContents.isEmpty()) {
-            try {
-                JSONObject jsonObject = new JSONObject(fileContents);
-                if (model != null) {
-                    if (jsonObject.has("surname")) {
-                        model.setCurrentSurname(jsonObject.getString("surname"));
-                        Log.v("debug display wanted surname ",jsonObject.getString("surname"));
-                    }
-                    if (jsonObject.has("name")) {
-                        model.setCurrentName(jsonObject.getString("name"));
-                    }
-                    if (jsonObject.has("birthdate")) {
-                        model.setCurrentBirthdate(jsonObject.getString("birthdate"));
-                    }
-                    if (jsonObject.has("number")) {
-                        model.setCurrentNumber(jsonObject.getString("number"));
-                    }
-                    if (jsonObject.has("mail")) {
-                        model.setCurrentMail(jsonObject.getString("mail"));
-                    }
-                    if(jsonObject.has("hobbies")){
-                        model.setCurrentHobby(jsonObject.getString("hobbies"));
-                    }
-                }
-            } catch (JSONException e) {
-                Log.e("DisplayFragment", "Error parsing JSON", e);
-                Toast.makeText(getContext(), "Failed to parse data", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    private String readFile(String filename) {
-        StringBuilder stringBuilder = new StringBuilder();
-        try (FileInputStream fis = getContext().openFileInput(filename)) {
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            String line;
-            while ((line = br.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-        } catch (IOException e) {
-            Log.e("DisplayFragment", "File read failed", e);
-            Toast.makeText(getContext(), "Failed to read data", Toast.LENGTH_SHORT).show();
-        }
-        return stringBuilder.toString();
     }
 
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {

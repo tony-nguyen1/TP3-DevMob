@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
-            android:padding="16dp">
+            android:padding="9dp">
 
             <Button
                 android:id="@+id/submit_button"
@@ -137,11 +137,11 @@
                 android:layout_height="wrap_content" />
             <Button
 
-                android:id="@+id/upload_button"
+                android:id="@+id/load_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/upload" />
+                android:text="@string/load" />
         </LinearLayout>
 
     </LinearLayout>
