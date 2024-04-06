@@ -5,14 +5,13 @@ import androidx.lifecycle.ViewModel;
 
 import java.io.Serializable;
 
-//TODO add hobby
 public class UserInputViewModel extends ViewModel implements Serializable {
-    private MutableLiveData<String> currentSurname= new MutableLiveData<>();
-    private MutableLiveData<String> currentName= new MutableLiveData<>();
-    private MutableLiveData<String> currentBirthdate= new MutableLiveData<>();
-    private MutableLiveData<String> currentNumber= new MutableLiveData<>();
-    private MutableLiveData<String> currentMail= new MutableLiveData<>();
-    private MutableLiveData<String> currentHobby = new MutableLiveData<>();
+    private transient MutableLiveData<String> currentSurname= new MutableLiveData<>();
+    private transient MutableLiveData<String> currentName= new MutableLiveData<>();
+    private transient MutableLiveData<String> currentBirthdate= new MutableLiveData<>();
+    private transient MutableLiveData<String> currentNumber= new MutableLiveData<>();
+    private transient MutableLiveData<String> currentMail= new MutableLiveData<>();
+    private transient MutableLiveData<String> currentHobby = new MutableLiveData<>();
 
     public MutableLiveData<String> getCurrentSurname() {
         return currentSurname;

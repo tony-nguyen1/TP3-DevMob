@@ -6,6 +6,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,13 +19,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.Observer;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 
 
@@ -76,10 +74,6 @@ public class DisplayFragment extends Fragment {
                 model.getCurrentHobby().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.hobbiesText));
 
                 Log.v("debug", "listening for updates");
-
-                myView.findViewById(R.id.return_button).setOnClickListener(view -> {
-                    readDataFromFileAndUpdateViewModel();
-                });
             }
         });
 
@@ -103,7 +97,7 @@ public class DisplayFragment extends Fragment {
         };
     }
 
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d("Broadcast", "Received broadcast...");
@@ -133,6 +127,7 @@ public class DisplayFragment extends Fragment {
 
     @Override
     public void onStop() {
+        Log.v("debug weird","onStop()");
         super.onStop();
         LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(mMessageReceiver);
     }

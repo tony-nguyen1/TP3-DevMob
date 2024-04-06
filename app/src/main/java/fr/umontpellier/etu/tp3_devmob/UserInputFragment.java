@@ -1,21 +1,10 @@
 package fr.umontpellier.etu.tp3_devmob;
 
 import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -26,18 +15,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.function.Function;
 
 public class UserInputFragment extends Fragment {
 
@@ -240,14 +232,6 @@ public class UserInputFragment extends Fragment {
     }
 
     // helper function //////////////////////////////////////
-    private void putDataInsideBundle(Bundle theDataHolder, EditText editText, String dataName) {
-        theDataHolder.putString(dataName, editText.getText().toString());
-    }
-
-    private void putDataInsideBundle(Bundle theDataHolder, TextView textView, String dataName) {
-        Log.v("debug input","textToSend="+textView.getText().toString()+" key="+dataName);
-        theDataHolder.putString(dataName, textView.getText().toString());
-    }
 
     // when editing form, if this.isSynchronousWithOutput is true, notify the model
     private void addTextChangedListener(EditText editText, View view, String aString) {
@@ -268,18 +252,7 @@ public class UserInputFragment extends Fragment {
             }
         });
     }
-/*  This part is to synchronise it instantly without cliquing submit
-    private void setupSynchronizationSwitch() {
-        SwitchMaterial syncSwitch = myView.findViewById(R.id.switch_sync);
-        syncSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            isSynchronousWithOutput = isChecked;
-            // Optionally force-update all fields upon enabling the switch
-            if(isSynchronousWithOutput) {
-                forceUpdateViewModel();
-            }
-        });
-    }
-*/
+
     private JSONObject constructJsonFromData() {
         JSONObject jsonObject = new JSONObject();
         try {
