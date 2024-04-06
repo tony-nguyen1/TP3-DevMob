@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.19)  2 APR 2024 15:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.19)  6 APR 2024 19:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -448,40 +448,46 @@ Underfull \hbox (badness 10000) in paragraph at lines 111--111
 []\T1/cmr/bx/n/12 Communication entre frag-
  []
 
+[3]
+<rapport/img//observer.png, id=68, 612.2875pt x 311.1625pt>
+File: rapport/img//observer.png Graphic file (type png)
+<use rapport/img//observer.png>
+Package pdftex.def Info: rapport/img//observer.png  used on input line 142.
+(pdftex.def)             Requested size: 221.95676pt x 112.79707pt.
 
-Overfull \hbox (50.9242pt too wide) in paragraph at lines 124--131
-\T1/cmr/m/n/10 getParentFragmentManager().setFragmentResult(keyString,
+Underfull \hbox (badness 10000) in paragraph at lines 141--143
+\T1/cmr/m/n/10 du pa-tron de concep-tion \T1/cmr/m/it/10 Ob-ser-va-teur
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 124--131
-\T1/cmr/m/n/10 getParentFragmentManager() set-Frag-men-tRe-
+Overfull \hbox (10.47281pt too wide) in paragraph at lines 141--143
+[] 
  []
 
-[3] [4] (rapport//rapport.aux) ) 
+[4 <./rapport/img//observer.png>] (rapport//rapport.aux) ) 
 Here is how much of TeX's memory you used:
- 10814 strings out of 479551
- 172303 string characters out of 5876172
+ 10817 strings out of 479551
+ 172515 string characters out of 5876172
  489488 words of memory out of 5000000
- 28639 multiletter control sequences out of 15000+600000
+ 28644 multiletter control sequences out of 15000+600000
  480982 words of font info for 49 fonts, out of 8000000 for 9000
  395 hyphenation exceptions out of 8191
- 60i,6n,63p,455b,491s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/tony/.texlive2021/texmf-var/fonts/pk/lj
-four/jknappen/ec/ecti1000.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
-four/jknappen/ec/ecbx1200.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
-four/jknappen/ec/ecbx1000.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
-four/jknappen/ec/ecbx1440.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
-four/jknappen/ec/ecrm1000.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
-four/jknappen/ec/ecti0900.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
-four/jknappen/ec/ecbx0900.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
-four/jknappen/ec/ecti1200.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
-four/jknappen/ec/ecrm1200.600pk> </home/tony/.texlive2021/texmf-var/fonts/pk/lj
-four/jknappen/ec/ecrm1728.600pk>
-Output written on rapport//rapport.pdf (4 pages, 467905 bytes).
+ 60i,6n,63p,545b,493s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/tony/.texlive
+2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </home/tony/.texlive
+2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/tony/.texlive
+2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/tony/.texlive
+2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/tony/.texlive
+2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/tony/.texlive
+2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0900.600pk> </home/tony/.texlive
+2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0900.600pk> </home/tony/.texlive
+2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/tony/.texlive
+2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/tony/.texlive
+2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk>
+Output written on rapport//rapport.pdf (4 pages, 486224 bytes).
 PDF statistics:
- 505 PDF objects out of 1000 (max. 8388607)
- 169 compressed objects within 2 object streams
- 36 named destinations out of 1000 (max. 500000)
- 150 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 469 PDF objects out of 1000 (max. 8388607)
+ 151 compressed objects within 2 object streams
+ 34 named destinations out of 1000 (max. 500000)
+ 123 words of extra memory for PDF output out of 10000 (max. 10000000)
 

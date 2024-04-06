@@ -73,22 +73,8 @@ public class DisplayFragment extends Fragment {
 
                 // so both fragment source and target have same UserInputViewModel
                 model = (UserInputViewModel) bundle.getSerializable("the_model");
-            }
-        });
 
-
-        // Subscribing to wait for change
-        // When another fragment setResult() with same requestKey, do this ->
-        // After click of "Submit" button
-        getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
-            @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                Log.v("debug display","received");
-
-                // Then, we listen for change through our ViewModel, and edit our TextView accordingly inside onChanged()
-                assert model != null;
-                //Log.v("debug",model.toString());
+                // We listen for change through our ViewModel, and edit our TextView accordingly inside onChanged()
 
                 // Create the observer which updates the UI.
                 // done inside createCustomObserver()
@@ -101,31 +87,16 @@ public class DisplayFragment extends Fragment {
                 model.getCurrentMail().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.mailText));
                 model.getCurrentHobby().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.hobbiesText));
 
+                Log.v("debug", "listening for updates");
+
                 myView.findViewById(R.id.return_button).setOnClickListener(view -> {
                     readDataFromFileAndUpdateViewModel();
                 });
-
             }
         });
 
+
         return myView;
-    }
-
-    // set text programmatically of a TextView using data from a bundle
-    private void addToView(Bundle theDataHolder, String dataName, int idTextView) {
-        Log.v("debug","adding to view");
-
-        TextView myText = myView.findViewById(idTextView);
-
-        Log.v("debug","text received="+theDataHolder.getString(dataName)+" key="+dataName);
-
-        myText.setText(theDataHolder.getString(dataName));
-        myText.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT));
-        Log.v("debug display",myText.getText().toString());
-
-        //linearLayout.addView(myText);
     }
 
     private Observer<String> createCustomObserver(int id) {
