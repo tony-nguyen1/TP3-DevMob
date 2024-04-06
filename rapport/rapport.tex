@@ -18,9 +18,9 @@
     filecolor=magenta,      
     urlcolor=red
     }
-% \urlstyle{same} % ça sert à rien ce truc
 \usepackage{bookmark}
 \usepackage{blindtext}
+\setlength\columnsep{30pt}
 
 
 
@@ -61,7 +61,7 @@
                 \item add smartphone picture
                 \item ask Satea for part 2 \& 3 explanation
                 \item !!! make an .apk file for easy install, no compilation !!!
-                \item diagram class observer
+                \item diagram class observer DONE
                 \item diagram class observer specific (Fragment Manager)
             \end{itemize}
         %     Faire une vidéo, le rapport avec des screenshot des résultats et du code et enfin un read.md(instruction). En plus, pour le bonus, faire une belle application, des tests unitaires, utiliser Kotlin, faire le rapport en Latex.
@@ -110,43 +110,51 @@
                 C'était trop dur.
             \subsection{Communication entre fragment}
                 \paragraph{}
-                    Avant la communication, il est nécessaire de créer un \emph Bundle qui contiendra toutes les informations à transmettre.
+                    Avant la communication, il est nécessaire de transmettre notre \emph{ModelView} contenant les différentes MutableLiveData.
                 \paragraph{}
-                    Une fois, les informations placé dans le \emph Bundle, nous pouvons envoyer le message. Pour faire cela, nous utilisons la méthode \textbf{setFragmentResult(String requestKey, Bundle result)} pour envoyer les données (contenus dans le bundle avec requestKey une chaine de charactères fixés à l'avance par le programmeur, le fragment receveur devra utiliser la même requestKey).
+                    Une fois le model placé dans le \emph{Bundle}, nous pouvons envoyer le message. Pour faire cela, nous utilisons la méthode \textbf{setFragmentResult(String requestKey, Bundle result)} pour envoyer les données (contenus dans le bundle avec requestKey une chaine de charactères fixés à l'avance par le programmeur, le fragment receveur devra utiliser la même requestKey).
                 
                 \paragraph{}
                     Le message est maintenant envoyé, nous allons voir comment le recevoir.
 
-                    Il sera nécessaire d'utiliser la méthode \textbf{setFragmentResultListener(@NonNull String requestKey, @NonNull LifecycleOwner lifecycleOwner, @NonNull FragmentResultListener listener)} de la classe \emph{FragmentManager}.
+                    Il sera nécessaire d'utiliser la méthode \textbf{setFragmentResultListener()} de la classe \emph{FragmentManager}.
 
-                    L'argument listener sera une classe anonyme qui hérite de \emph{FragmentResultListener} dans laquelle on masque la méthode \textbf{onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle)}. Si nous avons bien utilisé les même requestKey, alors bundle contiendra les bonnes données. À partir de là, nous mettons simplement ces informations dans des \emph{<TextView>}. 
-
-                    to send
-                \\
-                getParentFragmentManager().setFragmentResult(keyString, aBundle)
-                \\
-                to receive
-                \\
-                getParentFragmentManager().setFragmentResultListener() with same keyString in parameter 
-            \subsection{La synchronisation}
+                    L'argument listener sera une classe anonyme qui hérite de \emph{FragmentResultListener} dans laquelle on masque la méthode \textbf{onFragmentResult()}. Si nous avons bien utilisé les même requestKey, alors l'argument bundle contiendra les bonnes données. À partir de là, nos fragments possède la même instance du model.
+            \subsection{La synchronisation et mise à jour}
                 \paragraph{}
-                    Posting
-                    \\
-                    ViewModel - MutableLiveData - get the MutableLiveData from ViewModel then MutableLiveData.postValue()
+                    Lors de la détection d'un changements, nous souhaitons publié le changement et mettre à jour la vue. Pour cela, nous allons accéder aux différents \emph{MutableLiveData} dans notre \emph{ModelView} : \emph{UserInputViewModel}. Une fois fait, nous publions simplement la nouvelle valeur avec la méthode \textbf{postValue()}. Nous envoyons les valeurs lorsque l'utilisateur appuie sur "Submit" ou après qu'il ait selectioné l'option "Synchronise" puis modifie le texte.
+                \paragraph{}
+                    Afin d'être notifié des plublications, il faut s'abboner aux MutableLiveData et les \textbf{observer}.
                 \paragraph{}
                     Receiving
                     \\
                     get the MutableLiveData from ViewModel and observe
+                    \\
+                    Quand l'observateur est notifié, la méthode \textbf{onChanged()} est appelé et la nouvelle valeur est placé dans une \emph{<TextView>}.
             \subsection{Observer}
+                % To Do
+                % \begin{itemize}
+                %     \item diagram class observer
+                %     \item diagram class observer specific (Fragment Manager)
+                % \end{itemize}
+                \paragraph{}
+                    Voici un rappel du diagramme de classe du patron de conception \emph{Observateur} 
+                    \includegraphics[width=.49\textwidth]{observer}
+                \paragraph{}
+                    Il faut remarquer que ce design pattern est essentiel dans ce tp pour implémenter la communication entre les fragments. On y retrouve les méthodes de souscriptions, notifications et mises à jour.
+
+                    On identifie les méthodes de notifications comme \textbf{setFragmentResult()} et \textbf{postValue()}.
+
+                    Les méthodes de mises à jour correspondendt à \textbf{setFragmentResultListener()} et \textbf{observe()}.
         \section{Persistance}
             \subsection{Persistance}
             \subsection{Saisie automatique}
         \section{Réseau}
             Cet exerice n'a pas été réalisé.
         \section{Service}
-        \section{Bonus: LifeCycle}
-        \section{Bonus: ViewModel}
-        \section{Bonus: LiveData}
-        \section{Bonus: Room}
+        % \section{Bonus: LifeCycle}
+        % \section{Bonus: ViewModel}
+        % \section{Bonus: LiveData}
+        % \section{Bonus: Room}
     \end{multicols}
 \end{document}

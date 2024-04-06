@@ -53,32 +53,16 @@ public class DisplayFragment extends Fragment {
         TextView_mail = myView.findViewById(R.id.mailText);
         TextView_hobbies = myView.findViewById(R.id.hobbiesText);
 
-
-        // Subscribing to wait for change
-        // When another fragment setResult() with same requestKey, do this ->
-        // After click of "Submit" button
-        getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
+        getParentFragmentManager().setFragmentResultListener("Hello", this, new FragmentResultListener() {
             @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                Log.v("debug display","received");
-
-                // We set the text inside the empty TextView
-                addToView(bundle,"inputSurname",R.id.surnameText);
-                addToView(bundle,"inputName",R.id.nameText);
-                addToView(bundle,"inputBirthdate",R.id.birthdateText);
-                addToView(bundle,"inputNumber",R.id.numberText);
-                addToView(bundle,"inputMail",R.id.mailText);
-                addToView(bundle,"inputHobbies", R.id.hobbiesText);
-                //addToView(bundle,"isSynchron");
+                Log.v("debug display","received model");
 
                 // so both fragment source and target have same UserInputViewModel
-                model = (UserInputViewModel) bundle.getSerializable("theModel");
+                model = (UserInputViewModel) bundle.getSerializable("the_model");
 
-
-                // Then, we listen for change through our ViewModel, and edit our TextView accordingly inside onChanged()
-                assert model != null;
-                //Log.v("debug",model.toString());
+                // We listen for change through our ViewModel, and edit our TextView accordingly inside onChanged()
 
                 // Create the observer which updates the UI.
                 // done inside createCustomObserver()
@@ -91,27 +75,16 @@ public class DisplayFragment extends Fragment {
                 model.getCurrentMail().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.mailText));
                 model.getCurrentHobby().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.hobbiesText));
 
+                Log.v("debug", "listening for updates");
+
+                myView.findViewById(R.id.return_button).setOnClickListener(view -> {
+                    readDataFromFileAndUpdateViewModel();
+                });
             }
         });
 
+
         return myView;
-    }
-
-    // set text programmatically of a TextView using data from a bundle
-    private void addToView(Bundle theDataHolder, String dataName, int idTextView) {
-        Log.v("debug","adding to view");
-
-        TextView myText = myView.findViewById(idTextView);
-
-        Log.v("debug","text received="+theDataHolder.getString(dataName)+" key="+dataName);
-
-        myText.setText(theDataHolder.getString(dataName));
-        myText.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT));
-        Log.v("debug display",myText.getText().toString());
-
-        //linearLayout.addView(myText);
     }
 
     private Observer<String> createCustomObserver(int id) {
