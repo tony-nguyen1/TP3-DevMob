@@ -281,9 +281,10 @@ public class UserInputFragment extends Fragment {
         File  basePath = context.getExternalFilesDir(null);
         File file = new File(basePath , "test.json");
         Log.d("YourFragment", "Starting to write JSON to " + file.getAbsolutePath());
+        Toast.makeText(getContext(), "Wrote JSON to " + file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
         // Write the JSON object to the file
         try (FileWriter fileWriter = new FileWriter(file)) {
-            fileWriter.write(jsonObject.toString());
+            fileWriter.write(jsonObject.toString()  );
             Log.d("YourFragment", "Successfully written JSON to " + file.getAbsolutePath());
         } catch (IOException e) {
             Log.e("YourFragment", "Error writing JSON to file", e);
@@ -293,6 +294,7 @@ public class UserInputFragment extends Fragment {
     /**********  Saving data for presestance (when we leave the app)  *******/
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
+        Log.v("debug whenDoesItWork","onSaveInstanceState()");
         super.onSaveInstanceState(outState);
         Log.v("debug presistancy","Starting to save...");
         // Save the current state of your form or other data you need to preserve
@@ -307,10 +309,12 @@ public class UserInputFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        Log.v("debug whenDoesItWork","onViewCreated()");
         super.onViewCreated(view, savedInstanceState);
 
         // Initialize your views here if not already done
         Log.v("debug presistancy","Recovering the values...");
+        Log.v("debug whenDoesItWork",savedInstanceState != null ? "savedInstanceState is not null" : "savedInstanceState is null");
         if (savedInstanceState != null) {
             // Restore state here
 
@@ -323,6 +327,4 @@ public class UserInputFragment extends Fragment {
         }
         Log.v("debug presistancy","Values recoverd...");
     }
-
-
 }

@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.Observer;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import java.util.Objects;
 
 
 public class DisplayFragment extends Fragment {
@@ -120,15 +121,16 @@ public class DisplayFragment extends Fragment {
 
     @Override
     public void onStart() {
+        Log.v("debug whenDoesItWork","onStart()");
         super.onStart();
         IntentFilter intentFilter = new IntentFilter("action.UPDATE_DATA");
-        LocalBroadcastManager.getInstance(getContext()).registerReceiver(mMessageReceiver, intentFilter);
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(mMessageReceiver, intentFilter);
     }
 
     @Override
     public void onStop() {
-        Log.v("debug weird","onStop()");
+        Log.v("debug whenDoesItWork","onStop()");
         super.onStop();
-        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(mMessageReceiver);
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(mMessageReceiver);
     }
 }

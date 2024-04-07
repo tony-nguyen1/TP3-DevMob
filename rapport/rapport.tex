@@ -147,11 +147,30 @@
 
                     Les méthodes de mises à jour correspondendt à \textbf{setFragmentResultListener()} et \textbf{observe()}.
         \section{Persistance}
-            \subsection{Persistance}
+            \paragraph{}
+                Nous allons maintenant nous intéressé à la sauvegarde sur le long terme.
+            \subsection{Sauvegarde}
+                Lors d'un clique sur le boutton \emph{"Save"}, une écriture sur le stockage local du smartphone est enclenché.
+
+                La méthode \textbf{saveJsonToFile()} se chargera d'écrire dans le fichier \emph{test.json}. 
             \subsection{Saisie automatique}
         \section{Réseau}
             Cet exerice n'a pas été réalisé.
         \section{Service}
+            \paragraph{}
+                Après qu'une écriture sur le stockage du téléphone a été faite, il nous est possible de récupérer le contenu de ce fichier et de l'afficher à l'utilisateur.
+
+                À l'appuie du boutton "load", le service est démaré. \emph{FileDownloadService} va simplement lire le fichier de sauvegarde prédéfini \emph{test.json}.
+
+                Il va ensuite, diffuser les valeurs à travers un le \emph{LocalBroadcastManager}.
+            \paragraph{}
+                Dans le DisplayFragment, Nous nous mettons à l'écoute du broadcast. 
+
+                
+                
+                À la reception du broadcast, le text est écrasé par les différentes valeurs contenus dans le fichier.
+
+
         % \section{Bonus: LifeCycle}
         % \section{Bonus: ViewModel}
         % \section{Bonus: LiveData}
