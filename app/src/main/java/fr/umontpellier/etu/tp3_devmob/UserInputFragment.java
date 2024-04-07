@@ -123,6 +123,14 @@ public class UserInputFragment extends Fragment {
                 getActivity().startService(serviceIntent);
             }
         });
+
+        myView.findViewById(R.id.testing_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserInputFragment.this.getContext(), Homepage.class);
+                startActivity(intent);
+            }
+        });
         return myView;
     }
 
@@ -295,8 +303,8 @@ public class UserInputFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         Log.v("debug whenDoesItWork","onSaveInstanceState()");
-        super.onSaveInstanceState(outState);
         Log.v("debug presistancy","Starting to save...");
+        super.onSaveInstanceState(outState);
         // Save the current state of your form or other data you need to preserve
         outState.putString("KEY_SURNAME", surname.getText().toString());
         outState.putString("KEY_NAME", name.getText().toString());
@@ -310,11 +318,10 @@ public class UserInputFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Log.v("debug whenDoesItWork","onViewCreated()");
-        super.onViewCreated(view, savedInstanceState);
 
         // Initialize your views here if not already done
         Log.v("debug presistancy","Recovering the values...");
-        Log.v("debug whenDoesItWork",savedInstanceState != null ? "savedInstanceState is not null" : "savedInstanceState is null");
+        Log.v("debug whenDoesItWork",savedInstanceState != null ? "onViewCreated savedInstanceState is not null" : "savedInstanceState is null");
         if (savedInstanceState != null) {
             // Restore state here
 
@@ -326,5 +333,20 @@ public class UserInputFragment extends Fragment {
             hobby.setText(savedInstanceState.getString("KEY_HOBBIES"));
         }
         Log.v("debug presistancy","Values recoverd...");
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        Log.v("debug whenDoesItWork",savedInstanceState != null ? "onViewStateRestored savedInstanceState is not null" : "savedInstanceState is null");
+        super.onViewStateRestored(savedInstanceState);
+        Log.v("debug whenDoesItWork",savedInstanceState != null ? "onViewStateRestored savedInstanceState is not null" : "savedInstanceState is null");
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        Log.v("debug whenDoesItWork deprecated",savedInstanceState != null ? "onActivityCreated savedInstanceState is not null" : "savedInstanceState is null");
+        super.onActivityCreated(savedInstanceState);
+        Log.v("debug whenDoesItWork deprecated",savedInstanceState != null ? "onActivityCreated savedInstanceState is not null" : "savedInstanceState is null");
     }
 }
