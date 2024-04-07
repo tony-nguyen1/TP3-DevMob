@@ -57,7 +57,7 @@
         \section*{Démonstration vidéo}
             \addcontentsline{toc}{section}{Démonstration}
             \paragraph{}
-                En ligne sur Youtube, à l'adresse URL \url{https://youtu.be/NjIdJrN-Rm8} !!TODO!! une démonstration vidéo de notre travail.
+                En ligne sur Youtube, à l'adresse URL \url{https://youtu.be/OuzuGsB9IC4} une démonstration vidéo de notre travail.
         \section*{Installation}
             \addcontentsline{toc}{section}{Démonstration}
             \paragraph{}
@@ -66,18 +66,18 @@
     \newpage
     \begin{multicols}{2}
         [
-            To Do
-            \begin{itemize}
-                \item diagram use case DONE
-                \item diagram sequence for synchronisation DONE ~~~
-                \item diagram state machine w/ tikz library to describe save function NO
-                \item add code picture DONE
-                \item add smartphone picture DONE
-                \item !!! make an .apk file for easy install, no compilation !!! NO NEED, ALREADY DONE
-                \item diagram class observer DONE
-                \item diagram class observer specific (Fragment Manager) KO
-                \item → !!! → vidéo ← !!! ← 
-            \end{itemize}
+            % To Do
+            % \begin{itemize}
+            %     \item diagram use case DONE
+            %     \item diagram sequence for synchronisation DONE ~~~
+            %     \item diagram state machine w/ tikz library to describe save function NO
+            %     \item add code picture DONE
+            %     \item add smartphone picture DONE
+            %     \item !!! make an .apk file for easy install, no compilation !!! NO NEED, ALREADY DONE
+            %     \item diagram class observer DONE
+            %     \item diagram class observer specific (Fragment Manager) KO
+            %     \item → !!! → vidéo ← !!! ← 
+            % \end{itemize}
         %     Faire une vidéo, le rapport avec des screenshot des résultats et du code et enfin un read.md(instruction). En plus, pour le bonus, faire une belle application, des tests unitaires, utiliser Kotlin, faire le rapport en Latex.
         ]
         \section{Fragment}
@@ -181,6 +181,10 @@
 
                     Quand il revient sur notre application, on aimerai qu'il ne recommence pas du début.
                 \paragraph{Échec}
+                    Malheuresement, nous n'avons pas réussi à implémenter cette fonctionnalités.
+
+                    Dans le figure ci-dessous le code ne produisant \emph{pas} une sauvegarde de l'état du formulaire quand l'utilisateur quitte temporairement l'application.
+                    \\\\\noindent\includegraphics[width=.47\textwidth]{persistance/on}
         \section{Réseau}
             Cet exerice n'a pas été réalisé.
         \section{Service}
@@ -200,7 +204,11 @@
                 \\\\
                 \noindent\includegraphics[width=.47\textwidth]{load/FileDownloadService}
                 \noindent\includegraphics[width=.47\textwidth]{load/broadcastReceive}
-
+        \section{Conclusion}
+            \paragraph{}
+                Pour conclure cet exercice, nous avons réaliser une petite application formulaire avec des fragments communiquant entre eux.
+            \paragraph{}
+                Malgré un sujet assez obscure, nous avons interpréter aux mieux de nos capacités. Nous avons réussi à implémenter, nous pensons, la majorité des fonctionnalités attendus : l'utilisateur peut afficher et sauvegarder ces données (même s'il n'a encore rien écrit), modifier l'affichage à la volée mais aussi les charger depuis un fichier.
         \begin{figure*}
             \centering
             \caption{Diagrame d'utilisation de notre application mobile}
