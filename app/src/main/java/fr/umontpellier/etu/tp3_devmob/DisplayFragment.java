@@ -66,13 +66,26 @@ public class DisplayFragment extends Fragment {
                 // Create the observer which updates the UI.
                 // done inside createCustomObserver()
 
-                // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-                model.getCurrentSurname().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.surnameText));
-                model.getCurrentName().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.nameText));
-                model.getCurrentBirthdate().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.birthdateText));
-                model.getCurrentNumber().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.numberText));
-                model.getCurrentMail().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.mailText));
-                model.getCurrentHobby().observe(getViewLifecycleOwner(), DisplayFragment.this.createCustomObserver(R.id.hobbiesText));
+                // Observe the LiveData, passing in this activity
+                // as the LifecycleOwner and the observer.
+                model.getCurrentSurname().observe(
+                        getViewLifecycleOwner(),
+                        DisplayFragment.this.createCustomObserver(R.id.surnameText));
+                model.getCurrentName().observe(
+                        getViewLifecycleOwner(),
+                        DisplayFragment.this.createCustomObserver(R.id.nameText));
+                model.getCurrentBirthdate().observe(
+                        getViewLifecycleOwner(),
+                        DisplayFragment.this.createCustomObserver(R.id.birthdateText));
+                model.getCurrentNumber().observe(
+                        getViewLifecycleOwner(),
+                        DisplayFragment.this.createCustomObserver(R.id.numberText));
+                model.getCurrentMail().observe(
+                        getViewLifecycleOwner(),
+                        DisplayFragment.this.createCustomObserver(R.id.mailText));
+                model.getCurrentHobby().observe(
+                        getViewLifecycleOwner(),
+                        DisplayFragment.this.createCustomObserver(R.id.hobbiesText));
 
                 Log.v("debug", "listening for updates");
             }
@@ -82,6 +95,7 @@ public class DisplayFragment extends Fragment {
         return myView;
     }
 
+    // Create the observer which updates the UI.
     private Observer<String> createCustomObserver(int id) {
         return new Observer<String>() {
             @Override
@@ -116,7 +130,6 @@ public class DisplayFragment extends Fragment {
             TextView_mail.setText(mail);
             TextView_hobbies.setText(hobbies);
         }
-
     };
 
     @Override
@@ -124,7 +137,9 @@ public class DisplayFragment extends Fragment {
         Log.v("debug whenDoesItWork","onStart()");
         super.onStart();
         IntentFilter intentFilter = new IntentFilter("action.UPDATE_DATA");
-        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(mMessageReceiver, intentFilter);
+        LocalBroadcastManager
+                .getInstance(requireContext())
+                .registerReceiver(mMessageReceiver, intentFilter);
     }
 
     @Override

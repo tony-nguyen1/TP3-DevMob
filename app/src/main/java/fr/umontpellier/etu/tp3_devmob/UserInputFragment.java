@@ -51,6 +51,12 @@ public class UserInputFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.v("debug onCreate",savedInstanceState != null ? "savedInstanceState is not null" : "savedInstanceState is null");
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -91,11 +97,11 @@ public class UserInputFragment extends Fragment {
         myView.findViewById(R.id.submit_button).setOnClickListener(v -> {
             Log.v("debug","posting change");
             model.get("surname").postValue(surname.getText().toString());
-                model.get("name").postValue(name.getText().toString());
-                model.get("birthdate").postValue(birthdate.getText().toString());
-                model.get("number").postValue(number.getText().toString());
-                model.get("mail").postValue(mail.getText().toString());
-                model.get("hobby").postValue(hobby.getText().toString());
+            model.get("name").postValue(name.getText().toString());
+            model.get("birthdate").postValue(birthdate.getText().toString());
+            model.get("number").postValue(number.getText().toString());
+            model.get("mail").postValue(mail.getText().toString());
+            model.get("hobby").postValue(hobby.getText().toString());
 
             this.isSynchronousWithOutput = ((SwitchMaterial) myView.findViewById(R.id.switch_sync)).isChecked();
 
@@ -123,14 +129,7 @@ public class UserInputFragment extends Fragment {
                 getActivity().startService(serviceIntent);
             }
         });
-
-        myView.findViewById(R.id.testing_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UserInputFragment.this.getContext(), Homepage.class);
-                startActivity(intent);
-            }
-        });
+        Log.v("debug onCreateView",savedInstanceState != null ? "savedInstanceState is not null" : "savedInstanceState is null");
         return myView;
     }
 
@@ -303,25 +302,26 @@ public class UserInputFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         Log.v("debug whenDoesItWork","onSaveInstanceState()");
-        Log.v("debug presistancy","Starting to save...");
+        //Log.v("debug presistancy","Starting to save...");
         super.onSaveInstanceState(outState);
+        outState.putString("key","test");
         // Save the current state of your form or other data you need to preserve
-        outState.putString("KEY_SURNAME", surname.getText().toString());
+        /*outState.putString("KEY_SURNAME", surname.getText().toString());
         outState.putString("KEY_NAME", name.getText().toString());
         outState.putString("KEY_BIRTHDATE", birthdate.getText().toString());
         outState.putString("KEY_NUMBER", number.getText().toString());
         outState.putString("KEY_MAIL", mail.getText().toString());
         outState.putString("KEY_HOBBIES", hobby.getText().toString());
-        Log.v("debug presistancy","Values are saved...");
+        Log.v("debug presistancy","Values are saved...");*/
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Log.v("debug whenDoesItWork","onViewCreated()");
+        super.onViewCreated(view, savedInstanceState);
 
         // Initialize your views here if not already done
-        Log.v("debug presistancy","Recovering the values...");
-        Log.v("debug whenDoesItWork",savedInstanceState != null ? "onViewCreated savedInstanceState is not null" : "savedInstanceState is null");
+        //Log.v("debug presistancy","Recovering the values...");
+        Log.v("debug onViewCreated",savedInstanceState != null ? "savedInstanceState is not null" : "savedInstanceState is null");
         if (savedInstanceState != null) {
             // Restore state here
 
@@ -332,11 +332,10 @@ public class UserInputFragment extends Fragment {
             mail.setText(savedInstanceState.getString("KEY_MAIL"));
             hobby.setText(savedInstanceState.getString("KEY_HOBBIES"));
         }
-        Log.v("debug presistancy","Values recoverd...");
-        super.onViewCreated(view, savedInstanceState);
+        //Log.v("debug presistancy","Values recoverd...");
     }
 
-    @Override
+    /*@Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         Log.v("debug whenDoesItWork",savedInstanceState != null ? "onViewStateRestored savedInstanceState is not null" : "savedInstanceState is null");
         super.onViewStateRestored(savedInstanceState);
@@ -348,5 +347,5 @@ public class UserInputFragment extends Fragment {
         Log.v("debug whenDoesItWork deprecated",savedInstanceState != null ? "onActivityCreated savedInstanceState is not null" : "savedInstanceState is null");
         super.onActivityCreated(savedInstanceState);
         Log.v("debug whenDoesItWork deprecated",savedInstanceState != null ? "onActivityCreated savedInstanceState is not null" : "savedInstanceState is null");
-    }
+    }*/
 }

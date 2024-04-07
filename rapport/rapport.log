@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.19)  7 APR 2024 12:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.19)  7 APR 2024 16:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -348,7 +348,11 @@ File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count307
 \l__pdf_internal_box=\box95
 )
-(rapport//rapport.aux)
+(rapport//rapport.aux
+
+LaTeX Warning: Label `fig:useCase' multiply defined.
+
+)
 \openout1 = `rapport.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
@@ -371,8 +375,7 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 39.
 LaTeX Font Info:    ... okay on input line 39.
 LaTeX Info: Redefining \degres on input line 39.
 LaTeX Info: Redefining \up on input line 39.
-
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2021/12/07 v1.3c Standard LaTeX Color (DPC)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
@@ -436,58 +439,281 @@ Package pdftex.def Info: rapport/img//power.png  used on input line 42.
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./rapport/img//power.png>]
  (rapport//rapport.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 9.
+(Font)              <7> on input line 12.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 9.
+(Font)              <5> on input line 12.
 )
 \tf@toc=\write3
 \openout3 = `rapport.toc'.
 
- [2]
-Underfull \hbox (badness 10000) in paragraph at lines 111--111
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 6
+0.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+) [2]
+<rapport/img//fragment/no_input.png, id=59, 1084.05pt x 2348.775pt>
+File: rapport/img//fragment/no_input.png Graphic file (type png)
+<use rapport/img//fragment/no_input.png>
+Package pdftex.def Info: rapport/img//fragment/no_input.png  used on input line
+ 96.
+(pdftex.def)             Requested size: 104.18068pt x 225.71638pt.
+<rapport/img//fragment/input.png, id=60, 1084.05pt x 2348.775pt>
+File: rapport/img//fragment/input.png Graphic file (type png)
+<use rapport/img//fragment/input.png>
+Package pdftex.def Info: rapport/img//fragment/input.png  used on input line 97
+.
+(pdftex.def)             Requested size: 104.18068pt x 225.71638pt.
+<rapport/img//fragment/layout.png, id=61, 562.1pt x 278.03876pt>
+File: rapport/img//fragment/layout.png Graphic file (type png)
+<use rapport/img//fragment/layout.png>
+Package pdftex.def Info: rapport/img//fragment/layout.png  used on input line 1
+09.
+(pdftex.def)             Requested size: 181.18439pt x 89.61908pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 119--119
 []\T1/cmr/bx/n/12 Communication entre frag-
  []
 
-[3]
-<rapport/img//observer.png, id=68, 612.2875pt x 311.1625pt>
+<rapport/img//fragment/set.png, id=62, 685.56125pt x 219.82124pt>
+File: rapport/img//fragment/set.png Graphic file (type png)
+<use rapport/img//fragment/set.png>
+Package pdftex.def Info: rapport/img//fragment/set.png  used on input line 126.
+
+(pdftex.def)             Requested size: 212.89546pt x 68.26462pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--128
+
+ []
+
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 123--128
+[] 
+ []
+
+[3 <./rapport/img//fragment/no_input.png> <./rapport/img//fragment/input.png> <
+./rapport/img//fragment/layout.png> <./rapport/img//fragment/set.png>]
+<rapport/img//fragment/fragmentListen.png, id=80, 743.77875pt x 212.795pt>
+File: rapport/img//fragment/fragmentListen.png Graphic file (type png)
+<use rapport/img//fragment/fragmentListen.png>
+Package pdftex.def Info: rapport/img//fragment/fragmentListen.png  used on inpu
+t line 135.
+(pdftex.def)             Requested size: 212.89546pt x 60.9102pt.
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 135--136
+[] 
+ []
+
+<rapport/img//fragment/submittedSmall.png, id=81, 468.75125pt x 419.5675pt>
+File: rapport/img//fragment/submittedSmall.png Graphic file (type png)
+<use rapport/img//fragment/submittedSmall.png>
+Package pdftex.def Info: rapport/img//fragment/submittedSmall.png  used on inpu
+t line 137.
+(pdftex.def)             Requested size: 212.89546pt x 190.55139pt.
+<rapport/img//fragment/syncSmall.png, id=82, 356.33125pt x 118.4425pt>
+File: rapport/img//fragment/syncSmall.png Graphic file (type png)
+<use rapport/img//fragment/syncSmall.png>
+Package pdftex.def Info: rapport/img//fragment/syncSmall.png  used on input lin
+e 138.
+(pdftex.def)             Requested size: 212.89546pt x 70.76422pt.
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 137--139
+[]
+ []
+
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 137--139
+[] 
+ []
+
+<rapport/img//fragment/post.png, id=83, 580.1675pt x 324.21124pt>
+File: rapport/img//fragment/post.png Graphic file (type png)
+<use rapport/img//fragment/post.png>
+Package pdftex.def Info: rapport/img//fragment/post.png  used on input line 142
+.
+(pdftex.def)             Requested size: 212.89546pt x 118.97182pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--143
+
+ []
+
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 140--143
+[] 
+ []
+
+<rapport/img//fragment/observe.png, id=84, 592.2125pt x 458.71375pt>
+File: rapport/img//fragment/observe.png Graphic file (type png)
+<use rapport/img//fragment/observe.png>
+Package pdftex.def Info: rapport/img//fragment/observe.png  used on input line 
+146.
+(pdftex.def)             Requested size: 212.89546pt x 164.90584pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 144--147
+
+ []
+
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 144--147
+[] 
+ []
+
+<rapport/img//fragment/onChanged.png, id=85, 524.96124pt x 382.42876pt>
+File: rapport/img//fragment/onChanged.png Graphic file (type png)
+<use rapport/img//fragment/onChanged.png>
+Package pdftex.def Info: rapport/img//fragment/onChanged.png  used on input lin
+e 150.
+(pdftex.def)             Requested size: 212.89546pt x 155.09286pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 148--151
+
+ []
+
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 148--151
+[] 
+ []
+
+<rapport/img//observer.png, id=86, 612.2875pt x 311.1625pt>
 File: rapport/img//observer.png Graphic file (type png)
 <use rapport/img//observer.png>
-Package pdftex.def Info: rapport/img//observer.png  used on input line 142.
+Package pdftex.def Info: rapport/img//observer.png  used on input line 159.
 (pdftex.def)             Requested size: 221.95676pt x 112.79707pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 141--143
+Underfull \hbox (badness 10000) in paragraph at lines 158--160
 \T1/cmr/m/n/10 du pa-tron de concep-tion \T1/cmr/m/it/10 Ob-ser-va-teur
  []
 
 
-Overfull \hbox (10.47281pt too wide) in paragraph at lines 141--143
+Overfull \hbox (10.47281pt too wide) in paragraph at lines 158--160
 [] 
  []
 
-[4 <./rapport/img//observer.png>] (rapport//rapport.aux) ) 
+[4 <./rapport/img//fragment/fragmentListen.png> <./rapport/img//fragment/submit
+tedSmall.png> <./rapport/img//fragment/syncSmall.png> <./rapport/img//fragment/
+post.png> <./rapport/img//fragment/observe.png> <./rapport/img//fragment/onChan
+ged.png>]
+<rapport/img//persistance/savedSmall.png, id=102, 485.815pt x 206.7725pt>
+File: rapport/img//persistance/savedSmall.png Graphic file (type png)
+<use rapport/img//persistance/savedSmall.png>
+Package pdftex.def Info: rapport/img//persistance/savedSmall.png  used on input
+ line 170.
+(pdftex.def)             Requested size: 212.89546pt x 90.61102pt.
+<rapport/img//persistance/jsonFile.png, id=103, 915.42pt x 583.17876pt>
+File: rapport/img//persistance/jsonFile.png Graphic file (type png)
+<use rapport/img//persistance/jsonFile.png>
+Package pdftex.def Info: rapport/img//persistance/jsonFile.png  used on input l
+ine 171.
+(pdftex.def)             Requested size: 212.89546pt x 135.62325pt.
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 170--173
+[]
+ []
+
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 170--173
+[]
+ []
+
+<rapport/img//persistance/write.png, id=104, 858.20625pt x 194.7275pt>
+File: rapport/img//persistance/write.png Graphic file (type png)
+<use rapport/img//persistance/write.png>
+Package pdftex.def Info: rapport/img//persistance/write.png  used on input line
+ 175.
+(pdftex.def)             Requested size: 212.89546pt x 48.30438pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--176
+
+ []
+
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 174--176
+[] 
+ []
+
+<rapport/img//load/loaded.png, id=105, 1084.05pt x 2348.775pt>
+File: rapport/img//load/loaded.png Graphic file (type png)
+<use rapport/img//load/loaded.png>
+Package pdftex.def Info: rapport/img//load/loaded.png  used on input line 187.
+(pdftex.def)             Requested size: 212.89546pt x 461.25275pt.
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 187--188
+[] 
+ []
+
+[5 <./rapport/img//observer.png> <./rapport/img//persistance/savedSmall.png> <.
+/rapport/img//persistance/jsonFile.png> <./rapport/img//persistance/write.png>]
+<rapport/img//load/FileDownloadService.png, id=118, 755.82375pt x 714.67pt>
+File: rapport/img//load/FileDownloadService.png Graphic file (type png)
+<use rapport/img//load/FileDownloadService.png>
+Package pdftex.def Info: rapport/img//load/FileDownloadService.png  used on inp
+ut line 201.
+(pdftex.def)             Requested size: 212.89546pt x 201.30577pt.
+<rapport/img//load/broadcastReceive.png, id=119, 768.8725pt x 786.94pt>
+File: rapport/img//load/broadcastReceive.png Graphic file (type png)
+<use rapport/img//load/broadcastReceive.png>
+Package pdftex.def Info: rapport/img//load/broadcastReceive.png  used on input 
+line 202.
+(pdftex.def)             Requested size: 212.89546pt x 217.89212pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 199--203
+
+ []
+
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 199--203
+[]
+ []
+
+
+Overfull \hbox (1.41151pt too wide) in paragraph at lines 199--203
+[] 
+ []
+
+<rapport/img//jpg/useCase.jpg, id=120, 759.83875pt x 477.785pt>
+File: rapport/img//jpg/useCase.jpg Graphic file (type jpg)
+<use rapport/img//jpg/useCase.jpg>
+Package pdftex.def Info: rapport/img//jpg/useCase.jpg  used on input line 207.
+(pdftex.def)             Requested size: 362.37569pt x 227.86153pt.
+<rapport/img//jpg/sequence.jpg, id=121, 1166.3575pt x 643.40375pt>
+File: rapport/img//jpg/sequence.jpg Graphic file (type jpg)
+<use rapport/img//jpg/sequence.jpg>
+Package pdftex.def Info: rapport/img//jpg/sequence.jpg  used on input line 213.
+
+(pdftex.def)             Requested size: 362.37569pt x 199.89488pt.
+[6 <./rapport/img//load/loaded.png> <./rapport/img//load/FileDownloadService.pn
+g> <./rapport/img//load/broadcastReceive.png>] [7 <./rapport/img//jpg/useCase.j
+pg> <./rapport/img//jpg/sequence.jpg>] (rapport//rapport.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 10820 strings out of 479551
- 172548 string characters out of 5876172
- 489488 words of memory out of 5000000
- 28644 multiletter control sequences out of 15000+600000
- 480982 words of font info for 49 fonts, out of 8000000 for 9000
+ 11093 strings out of 479551
+ 180546 string characters out of 5876172
+ 486650 words of memory out of 5000000
+ 28874 multiletter control sequences out of 15000+600000
+ 482303 words of font info for 52 fonts, out of 8000000 for 9000
  395 hyphenation exceptions out of 8191
- 60i,6n,63p,545b,493s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/tony/.texlive
-2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </home/tony/.texlive
-2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/tony/.texlive
-2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/tony/.texlive
-2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/tony/.texlive
-2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/tony/.texlive
-2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0900.600pk> </home/tony/.texlive
-2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0900.600pk> </home/tony/.texlive
-2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/tony/.texlive
-2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/tony/.texlive
-2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk>
-Output written on rapport//rapport.pdf (4 pages, 489055 bytes).
+ 60i,6n,63p,545b,507s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1000.600p
+k> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600p
+k> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600p
+k> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600p
+k> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600p
+k> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600p
+k> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600p
+k> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600p
+k> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0900.600p
+k> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0900.600p
+k> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600p
+k> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600p
+k> </home/tony/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600p
+k>
+Output written on rapport//rapport.pdf (7 pages, 1570493 bytes).
 PDF statistics:
- 482 PDF objects out of 1000 (max. 8388607)
- 157 compressed objects within 2 object streams
- 37 named destinations out of 1000 (max. 500000)
- 123 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 586 PDF objects out of 1000 (max. 8388607)
+ 188 compressed objects within 2 object streams
+ 46 named destinations out of 1000 (max. 500000)
+ 213 words of extra memory for PDF output out of 10000 (max. 10000000)
 

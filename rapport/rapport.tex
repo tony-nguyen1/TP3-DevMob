@@ -30,9 +30,9 @@
 %\pagestyle{headings}        % Pour mettre des entêtes avec les titres
                               % des sections en haut de page
 
-\title{  TP2 : Les capteurs\\Programmation mobile}
+\title{  TP3 : Les fragments\\Programmation mobile}
 \author{Mohamad Satea Almallouhi - Tony Nguyen\\\emph{M1 Génie Logiciel}\\Faculté des Sciences\\Université de Montpellier.}
-\date{5 mars 2024}
+\date{7 avril 2024}
 
 
 
@@ -43,30 +43,12 @@
     \end{center}
 
     \begin{abstract}     % Résumé du travail
-      \emph{Nous avons réalisé une application Android en Java afin de démontrer l'utilisation des capteurs intégré.}
+      \emph{Durant cet exercice, nous avons vue l'utilisation des Fragments, ModelView et MutableLiveData.}
     \end{abstract}
     \newpage
     %\dominitoc  % initializer les minitoc
     \tableofcontents
-
-    \newpage
-    \begin{multicols}{2}
-        [
-            To Do
-            \begin{itemize}
-                \item diagram use case
-                \item diagram sequence for synchronisation
-                \item diagram state machine w/ tikz library to describe save function
-                \item add code picture
-                \item add smartphone picture
-                \item ask Satea for part 2 \& 3 explanation
-                \item !!! make an .apk file for easy install, no compilation !!!
-                \item diagram class observer DONE
-                \item diagram class observer specific (Fragment Manager)
-            \end{itemize}
-        %     Faire une vidéo, le rapport avec des screenshot des résultats et du code et enfin un read.md(instruction). En plus, pour le bonus, faire une belle application, des tests unitaires, utiliser Kotlin, faire le rapport en Latex.
-        ]
-        \section*{Introduction}
+    \section*{Introduction}
             \addcontentsline{toc}{section}{Introduction}
             \paragraph{}
                 Dans le cadre de l'Unité d'Enseignement Programmation Mobile, nous allons voir comment utiliser des fragments et la persistance des données.
@@ -74,6 +56,30 @@
                 Les sections du rapport suit les exercices.
         \section*{Démonstration vidéo}
             \addcontentsline{toc}{section}{Démonstration}
+            \paragraph{}
+                En ligne sur Youtube, à l'adresse URL \url{https://youtu.be/NjIdJrN-Rm8} !!TODO!! une démonstration vidéo de notre travail.
+        \section*{Installation}
+            \addcontentsline{toc}{section}{Démonstration}
+            \paragraph{}
+                Vous trouvez les instructions dans le README.md
+
+    \newpage
+    \begin{multicols}{2}
+        [
+            To Do
+            \begin{itemize}
+                \item diagram use case DONE
+                \item diagram sequence for synchronisation DONE ~~~
+                \item diagram state machine w/ tikz library to describe save function NO
+                \item add code picture DONE
+                \item add smartphone picture DONE
+                \item !!! make an .apk file for easy install, no compilation !!! NO NEED, ALREADY DONE
+                \item diagram class observer DONE
+                \item diagram class observer specific (Fragment Manager) KO
+                \item → !!! → vidéo ← !!! ← 
+            \end{itemize}
+        %     Faire une vidéo, le rapport avec des screenshot des résultats et du code et enfin un read.md(instruction). En plus, pour le bonus, faire une belle application, des tests unitaires, utiliser Kotlin, faire le rapport en Latex.
+        ]
         \section{Fragment}
             \paragraph{}
                 Un fragment est une portion réutilisable de l'interface utilisateur de notre application. Ils sont utiles car ils sont modulaires et réutilisables. 
@@ -86,9 +92,9 @@
                     Pour spécifier le comportement du nouveau fragment, il nous suffira de masquer la méthode \textbf{onCreateView()}.
 
                     Dans ce TP, nous avons créer 2 fragments, \textbf{UserInputFragment} et \textbf{DisplayFragment}.
-
-                    (UserInputFragment, DisplayFragment extends Fragment)
             \subsection{Ajout}
+                \noindent\includegraphics[width=.23\textwidth]{fragment/no_input}
+                \noindent\includegraphics[width=.23\textwidth]{fragment/input}
                 \paragraph{}
                     Pour pouvoir les afficher, nous avons créer une activity et son layout vide.
                     
@@ -99,38 +105,49 @@
                     L'attribut \textbf{tools:layout} associe cette balise au layout indiqué.
 
                     Nous savons à présent comment créer un fragment, et l'afficher.
-                    
-                    tag fragment - attribut name pour la classe et attribut layout pour la vue
-                    \\
-                    Start\_toStartOf
-                    Top\_toTopOf 
-                    ...
+                    \begin{center}
+                        \noindent\includegraphics[width=.40\textwidth]{fragment/layout}
+                    \end{center}
+            %         tag fragment - attribut name pour la classe et attribut layout pour la vue
+            %         \\
+            %         Start\_toStartOf
+            %         Top\_toTopOf 
+            %         ...
             
-            \subsection{Couper l'écran en 2}
-                C'était trop dur.
+            % \subsection{Couper l'écran en 2}
+            %     C'était trop dur.
             \subsection{Communication entre fragment}
                 \paragraph{}
                     Avant la communication, il est nécessaire de transmettre notre \emph{ModelView} contenant les différentes MutableLiveData.
                 \paragraph{}
-                    Une fois le model placé dans le \emph{Bundle}, nous pouvons envoyer le message. Pour faire cela, nous utilisons la méthode \textbf{setFragmentResult(String requestKey, Bundle result)} pour envoyer les données (contenus dans le bundle avec requestKey une chaine de charactères fixés à l'avance par le programmeur, le fragment receveur devra utiliser la même requestKey).
-                
+                    Une fois le model placé dans le \emph{Bundle}, nous pouvons envoyer le message. Pour faire cela, nous utilisons la méthode \textbf{setFragmentResult(String,Bundle)} pour envoyer les données (contenus dans le bundle avec requestKey une chaine de charactères fixés à l'avance par le programmeur, le fragment receveur devra utiliser la même requestKey). Le message est maintenant envoyé, nous allons voir comment le recevoir.
+                    % \begin{center}
+                        \\\\
+                        \noindent\includegraphics[width=.47\textwidth]{fragment/set}
+                    % \end{center}
                 \paragraph{}
-                    Le message est maintenant envoyé, nous allons voir comment le recevoir.
+                    Nous allons maintenant voir comment recevoir le message.
 
                     Il sera nécessaire d'utiliser la méthode \textbf{setFragmentResultListener()} de la classe \emph{FragmentManager}.
 
                     L'argument listener sera une classe anonyme qui hérite de \emph{FragmentResultListener} dans laquelle on masque la méthode \textbf{onFragmentResult()}. Si nous avons bien utilisé les même requestKey, alors l'argument bundle contiendra les bonnes données. À partir de là, nos fragments possède la même instance du model.
+
+                    \noindent\includegraphics[width=.47\textwidth]{fragment/fragmentListen}
             \subsection{La synchronisation et mise à jour}
+                \noindent\includegraphics[width=.47\textwidth]{fragment/submittedSmall}
+                \noindent\includegraphics[width=.47\textwidth]{fragment/syncSmall}
                 \paragraph{}
                     Lors de la détection d'un changements, nous souhaitons publié le changement et mettre à jour la vue. Pour cela, nous allons accéder aux différents \emph{MutableLiveData} dans notre \emph{ModelView} : \emph{UserInputViewModel}. Une fois fait, nous publions simplement la nouvelle valeur avec la méthode \textbf{postValue()}. Nous envoyons les valeurs lorsque l'utilisateur appuie sur "Submit" ou après qu'il ait selectioné l'option "Synchronise" puis modifie le texte.
+                    \\\\
+                    \noindent\includegraphics[width=.47\textwidth]{fragment/post}
                 \paragraph{}
-                    Afin d'être notifié des plublications, il faut s'abboner aux MutableLiveData et les \textbf{observer}.
+                    Afin d'être notifié des plublications, il ne faut pas oublier de s'abboner aux MutableLiveData et les \textbf{observer}.
+                    \\\\
+                    \noindent\includegraphics[width=.47\textwidth]{fragment/observe}
                 \paragraph{}
-                    Receiving
-                    \\
-                    get the MutableLiveData from ViewModel and observe
-                    \\
                     Quand l'observateur est notifié, la méthode \textbf{onChanged()} est appelé et la nouvelle valeur est placé dans une \emph{<TextView>}.
+                    \\\\
+                    \noindent\includegraphics[width=.47\textwidth]{fragment/onChanged}
             \subsection{Observer}
                 % To Do
                 % \begin{itemize}
@@ -148,15 +165,26 @@
                     Les méthodes de mises à jour correspondendt à \textbf{setFragmentResultListener()} et \textbf{observe()}.
         \section{Persistance}
             \paragraph{}
-                Nous allons maintenant nous intéressé à la sauvegarde sur le long terme.
+                Nous allons maintenant nous intéressé à la conservation des données.
             \subsection{Sauvegarde}
+                \noindent\includegraphics[width=.47\textwidth]{persistance/savedSmall}
+                \noindent\includegraphics[width=.47\textwidth]{persistance/jsonFile}
                 Lors d'un clique sur le boutton \emph{"Save"}, une écriture sur le stockage local du smartphone est enclenché.
 
-                La méthode \textbf{saveJsonToFile()} se chargera d'écrire dans le fichier \emph{test.json}. 
-            \subsection{Saisie automatique}
+                La méthode \textbf{saveJsonToFile()} se chargera de récupérer les informations intéressantes, les convertire en format JSON et d'écrire dans le fichier \emph{test.json}.
+                \\\\\noindent\includegraphics[width=.47\textwidth]{persistance/write}
+            \subsection{(Re-)Saisie automatique}
+                \paragraph{}
+                    Imaginons un petit scénario. 
+
+                    Un utilisateur commence à saisir ses informations et fait une mauvaise manipulation. Il a appuyé sur le boutton de retour à l'écran d'accueil (Android) du smartphone. 
+
+                    Quand il revient sur notre application, on aimerai qu'il ne recommence pas du début.
+                \paragraph{Échec}
         \section{Réseau}
             Cet exerice n'a pas été réalisé.
         \section{Service}
+            \noindent\includegraphics[width=.47\textwidth]{load/loaded}
             \paragraph{}
                 Après qu'une écriture sur le stockage du téléphone a été faite, il nous est possible de récupérer le contenu de ce fichier et de l'afficher à l'utilisateur.
 
@@ -164,13 +192,27 @@
 
                 Il va ensuite, diffuser les valeurs à travers un le \emph{LocalBroadcastManager}.
             \paragraph{}
-                Dans le DisplayFragment, Nous nous mettons à l'écoute du broadcast. 
+                Dans le DisplayFragment, Nous nous mettons à l'écoute du broadcast avec la fonction \textbf{registerReceiver()}.
 
+                À la reception du broadcast, le text est écrasé par les différentes valeurs contenus dans le fichier grâce à la fonction \textbf{onReceive()}.
                 
-                
-                À la reception du broadcast, le text est écrasé par les différentes valeurs contenus dans le fichier.
+                On remarquera que l'\emph{Intent} et l'\emph{IntentFilter} ont le même nom.
+                \\\\
+                \noindent\includegraphics[width=.47\textwidth]{load/FileDownloadService}
+                \noindent\includegraphics[width=.47\textwidth]{load/broadcastReceive}
 
-
+        \begin{figure*}
+            \centering
+            \caption{Diagrame d'utilisation de notre application mobile}
+            \includegraphics[width=.8\textwidth]{jpg/useCase}
+            \label{fig:useCase}
+        \end{figure*}
+        \begin{figure*}
+            \centering
+            \caption{Diagrame de séquence \emph{possible} représentant la mise en place de la communication inter-fragment}
+            \includegraphics[width=.8\textwidth]{jpg/sequence}
+            \label{fig:useCase}
+        \end{figure*}
         % \section{Bonus: LifeCycle}
         % \section{Bonus: ViewModel}
         % \section{Bonus: LiveData}

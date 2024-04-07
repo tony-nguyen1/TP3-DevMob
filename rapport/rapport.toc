@@ -1,32 +1,36 @@
 \babel@toc {french}{}\relax 
-\contentsline {section}{Introduction}{3}{section*.2}%
-\contentsline {paragraph}{}{3}{section*.3}%
-\contentsline {paragraph}{}{3}{section*.4}%
-\contentsline {section}{Démonstration}{3}{section*.5}%
+\contentsline {section}{Introduction}{2}{section*.2}%
+\contentsline {paragraph}{}{2}{section*.3}%
+\contentsline {paragraph}{}{2}{section*.4}%
+\contentsline {section}{Démonstration}{2}{section*.5}%
+\contentsline {paragraph}{}{2}{section*.6}%
+\contentsline {section}{Démonstration}{2}{section*.7}%
+\contentsline {paragraph}{}{2}{section*.8}%
 \contentsline {section}{\numberline {1}Fragment}{3}{section.1}%
-\contentsline {paragraph}{}{3}{section*.6}%
-\contentsline {paragraph}{}{3}{section*.7}%
-\contentsline {subsection}{\numberline {1.1}Création}{3}{subsection.1.1}%
-\contentsline {paragraph}{}{3}{section*.8}%
-\contentsline {subsection}{\numberline {1.2}Ajout}{3}{subsection.1.2}%
 \contentsline {paragraph}{}{3}{section*.9}%
-\contentsline {subsection}{\numberline {1.3}Couper l'écran en 2}{3}{subsection.1.3}%
-\contentsline {subsection}{\numberline {1.4}Communication entre fragment}{3}{subsection.1.4}%
 \contentsline {paragraph}{}{3}{section*.10}%
+\contentsline {subsection}{\numberline {1.1}Création}{3}{subsection.1.1}%
 \contentsline {paragraph}{}{3}{section*.11}%
+\contentsline {subsection}{\numberline {1.2}Ajout}{3}{subsection.1.2}%
 \contentsline {paragraph}{}{3}{section*.12}%
-\contentsline {subsection}{\numberline {1.5}La synchronisation et mise à jour}{4}{subsection.1.5}%
-\contentsline {paragraph}{}{4}{section*.13}%
-\contentsline {paragraph}{}{4}{section*.14}%
+\contentsline {subsection}{\numberline {1.3}Communication entre fragment}{3}{subsection.1.3}%
+\contentsline {paragraph}{}{3}{section*.13}%
+\contentsline {paragraph}{}{3}{section*.14}%
 \contentsline {paragraph}{}{4}{section*.15}%
-\contentsline {subsection}{\numberline {1.6}Observer}{4}{subsection.1.6}%
+\contentsline {subsection}{\numberline {1.4}La synchronisation et mise à jour}{4}{subsection.1.4}%
 \contentsline {paragraph}{}{4}{section*.16}%
 \contentsline {paragraph}{}{4}{section*.17}%
-\contentsline {section}{\numberline {2}Persistance}{4}{section.2}%
 \contentsline {paragraph}{}{4}{section*.18}%
-\contentsline {subsection}{\numberline {2.1}Sauvegarde}{4}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Saisie automatique}{4}{subsection.2.2}%
-\contentsline {section}{\numberline {3}Réseau}{4}{section.3}%
-\contentsline {section}{\numberline {4}Service}{4}{section.4}%
+\contentsline {subsection}{\numberline {1.5}Observer}{4}{subsection.1.5}%
 \contentsline {paragraph}{}{4}{section*.19}%
-\contentsline {paragraph}{}{4}{section*.20}%
+\contentsline {paragraph}{}{5}{section*.20}%
+\contentsline {section}{\numberline {2}Persistance}{5}{section.2}%
+\contentsline {paragraph}{}{5}{section*.21}%
+\contentsline {subsection}{\numberline {2.1}Sauvegarde}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}(Re-)Saisie automatique}{5}{subsection.2.2}%
+\contentsline {paragraph}{}{5}{section*.22}%
+\contentsline {paragraph}{Échec}{5}{section*.23}%
+\contentsline {section}{\numberline {3}Réseau}{5}{section.3}%
+\contentsline {section}{\numberline {4}Service}{6}{section.4}%
+\contentsline {paragraph}{}{6}{section*.24}%
+\contentsline {paragraph}{}{6}{section*.25}%
